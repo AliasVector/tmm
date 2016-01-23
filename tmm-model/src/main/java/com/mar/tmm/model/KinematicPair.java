@@ -11,7 +11,17 @@ public interface KinematicPair {
      */
     String getName();
 
-    Unit getUnit();
+    /**
+     * Returns the connected element of some unit.
+     *
+     * @return {@link Unit.Element} instance
+     */
+    Unit.Element getElement1();
 
-    Unit getUnit2();
+    /**
+     * Returns the connected element of some unit.
+     *
+     * @return {@link Unit.Element} instance
+     */
+    Unit.Element getElement2();
 }
