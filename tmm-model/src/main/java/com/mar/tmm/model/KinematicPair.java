@@ -12,6 +12,13 @@ public interface KinematicPair {
     String getName();
 
     /**
+     * Returns the class of this kinematic pair.
+     *
+     * @return {@link KinematicPair.KinematicClass} instance
+     */
+    KinematicClass getKinematicClass();
+
+    /**
      * Returns the connected element of some unit.
      *
      * @return {@link Unit.Element} instance
@@ -24,4 +31,22 @@ public interface KinematicPair {
      * @return {@link Unit.Element} instance
      */
     Unit.Element getElement2();
+
+    /**
+     * Enum with classes of kinematic pairs.
+     */
+    public static enum KinematicClass {
+        P4(1),
+        P5(2);
+
+        int limitataion;
+
+        KinematicClass(final int limitation) {
+            this.limitataion = limitation;
+        }
+
+        public int getLimitataion() {
+            return limitataion;
+        }
+    }
 }

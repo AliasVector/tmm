@@ -25,6 +25,13 @@ public interface Unit {
      */
     interface Element {
         /**
+         * Returns the respected unit which this element belongs to.
+         *а
+         * @return {@link Unit} instance
+         */
+        Unit getUnit();
+
+        /**
          * Returns the disposition of this element inside Unit.
          *
          * @return {@link Disposition} instance
