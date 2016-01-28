@@ -1,4 +1,4 @@
-package com.mar.tmm.model;
+package com.mar.tmm.model.impl;
 
 /**
  * Describes the location of related element.

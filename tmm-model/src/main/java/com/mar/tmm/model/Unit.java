@@ -2,6 +2,8 @@ package com.mar.tmm.model;
 
 import java.util.List;
 
+import com.mar.tmm.model.impl.Disposition;
+
 /**
  * Interface to describe the common behavior for mechanism group's unit.
  */
