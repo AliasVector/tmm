@@ -4,9 +4,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * Describes an slide unit which can move back and forward.
+ * Describes an lever unit.
  */
-public class SlideUnit extends AbstractUnit {
+public class LeverUnit extends AbstractUnit {
 
     /**
      * {@inheritDoc}
