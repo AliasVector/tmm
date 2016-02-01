@@ -8,6 +8,16 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class LeverUnit extends AbstractUnit {
 
+    private double length;
+
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(final double length) {
+        this.length = length;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -15,6 +25,7 @@ public class LeverUnit extends AbstractUnit {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
             .appendSuper(super.toString())
+            .append("length", length)
             .toString();
     }
 }
