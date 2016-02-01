@@ -1,9 +1,18 @@
 package com.mar.tmm.model;
 
+import com.mar.tmm.model.impl.Disposition;
+
 /**
  * Interface to describe the common behavior for mechanism group's element.
  */
 public interface KinematicPair {
+    /**
+     * Returns the disposition of the kinematic pair.
+     *
+     * @return {@link Disposition} instance
+     */
+    Disposition getDisposition();
+
     /**
      * Returns the name of the kinematic pair.
      *

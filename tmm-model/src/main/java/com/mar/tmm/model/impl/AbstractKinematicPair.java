@@ -10,6 +10,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public abstract class AbstractKinematicPair implements KinematicPair {
     private String name;
+    private Disposition disposition = new Disposition();
     private Unit.Element element1;
     private Unit.Element element2;
 
@@ -26,6 +27,15 @@ public abstract class AbstractKinematicPair implements KinematicPair {
 
     public void setName(final String name) {
         this.name = name;
+    }
+
+    @Override
+    public Disposition getDisposition() {
+        return disposition;
+    }
+
+    public void setDisposition(final Disposition disposition) {
+        this.disposition = disposition;
     }
 
     @Override
@@ -53,6 +63,7 @@ public abstract class AbstractKinematicPair implements KinematicPair {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
             .append("name", name)
+            .append("disposition", disposition)
             .append("element1", element1)
             .append("element2", element2)
             .toString();

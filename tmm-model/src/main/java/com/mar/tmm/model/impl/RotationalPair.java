@@ -1,6 +1,7 @@
 package com.mar.tmm.model.impl;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Describes rotational kinematic pair.
@@ -30,7 +31,7 @@ public class RotationalPair extends AbstractKinematicPair {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
             .appendSuper(super.toString())
             .append("kinematicClass", kinematicClass)
             .append("angle", angle)
