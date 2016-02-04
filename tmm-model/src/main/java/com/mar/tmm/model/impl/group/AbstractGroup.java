@@ -1,17 +1,54 @@
-package com.mar.tmm.model.impl;
+package com.mar.tmm.model.impl.group;
 
+import java.util.List;
 import java.util.Set;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.mar.tmm.model.Group;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Unit;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * Default implementation of group.
+ * Abstract group functionality.
  */
-public class DefaultGroup extends AbstractGroup {
+public abstract class AbstractGroup implements Group {
     private static final int UNITS_RATE = 3;
     private static final int P5_RATE = 2;
+
+    private String name;
+    private List<KinematicPair> kinematicPairs = Lists.newArrayList();
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<KinematicPair> getExternalKinematicPairs() {
+        return kinematicPairs;
+    }
+
+    public void setExternalKinematicPairs(final List<KinematicPair> kinematicPairs) {
+        this.kinematicPairs = kinematicPairs;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+            .append("name", name)
+            .append("kinematicPairs", kinematicPairs)
+            .toString();
+    }
 
     /**
      * {@inheritDoc}
@@ -64,5 +101,4 @@ public class DefaultGroup extends AbstractGroup {
         result.remove(kinematicPair);
         return result;
     }
-
 }

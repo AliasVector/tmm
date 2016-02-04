@@ -1,14 +1,15 @@
-package com.mar.tmm.model.impl;
+package com.mar.tmm.model.impl.unit;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * Describes an lever unit.
+ * Describes an slide unit which can move back and forward.
  */
-public class LeverUnit extends AbstractUnit {
+public class SlideUnit extends AbstractUnit {
 
     private double length;
+    private double height;
 
     public double getLength() {
         return length;
@@ -16,6 +17,14 @@ public class LeverUnit extends AbstractUnit {
 
     public void setLength(final double length) {
         this.length = length;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(final double height) {
+        this.height = height;
     }
 
     /**
@@ -26,6 +35,7 @@ public class LeverUnit extends AbstractUnit {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
             .appendSuper(super.toString())
             .append("length", length)
+            .append("height", height)
             .toString();
     }
 }

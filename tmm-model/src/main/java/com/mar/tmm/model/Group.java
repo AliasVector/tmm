@@ -6,6 +6,14 @@ import java.util.List;
  * Interface to describe the common behavior for mechanism group.
  */
 public interface Group {
+
+    /**
+     * Returns the type of the group.
+     *
+     * @return instance of type {@link GroupType}
+     */
+    GroupType getType();
+
     /**
      * Returns the name of the group.
      *

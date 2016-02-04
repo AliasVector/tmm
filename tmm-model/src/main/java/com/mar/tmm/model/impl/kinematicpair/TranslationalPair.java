@@ -1,15 +1,15 @@
-package com.mar.tmm.model.impl;
+package com.mar.tmm.model.impl.kinematicpair;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * Describes rotational kinematic pair.
+ * Describes translational kinematic pair.
  */
-public class RotationalPair extends AbstractKinematicPair {
+public class TranslationalPair extends AbstractKinematicPair {
 
     private final KinematicClass kinematicClass = KinematicClass.P4;
-    private double angle;
+    private double movement;
 
     @Override
     public KinematicClass getKinematicClass() {
@@ -21,12 +21,12 @@ public class RotationalPair extends AbstractKinematicPair {
      *
      * @return double value of angle
      */
-    public double getAngle() {
-        return angle;
+    public double getMovement() {
+        return movement;
     }
 
-    public void setAngle(final double angle) {
-        this.angle = angle;
+    public void setMovement(final double movement) {
+        this.movement = movement;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class RotationalPair extends AbstractKinematicPair {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
             .appendSuper(super.toString())
             .append("kinematicClass", kinematicClass)
-            .append("angle", angle)
+            .append("movement", movement)
             .toString();
     }
 }

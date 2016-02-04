@@ -1,7 +1,8 @@
-package com.mar.tmm.model.impl;
+package com.mar.tmm.model.impl.kinematicpair;
 
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Unit;
+import com.mar.tmm.model.impl.Disposition;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 

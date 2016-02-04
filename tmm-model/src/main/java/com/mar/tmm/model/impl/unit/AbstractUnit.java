@@ -1,4 +1,4 @@
-package com.mar.tmm.model.impl;
+package com.mar.tmm.model.impl.unit;
 
 import java.util.List;
 
