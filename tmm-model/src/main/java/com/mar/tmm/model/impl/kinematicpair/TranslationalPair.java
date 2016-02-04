@@ -11,6 +11,13 @@ public class TranslationalPair extends AbstractKinematicPair {
     private final KinematicClass kinematicClass = KinematicClass.P4;
     private double movement;
 
+    public TranslationalPair() {
+    }
+
+    public TranslationalPair(final String name) {
+        setName(name);
+    }
+
     @Override
     public KinematicClass getKinematicClass() {
         return kinematicClass;

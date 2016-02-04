@@ -9,6 +9,13 @@ import com.mar.tmm.model.GroupType;
 public class FirstTypeGroup extends AbstractGroup {
     private static final GroupType TYPE = GroupType.FIRST;
 
+    public FirstTypeGroup() {
+    }
+
+    public FirstTypeGroup(final String name) {
+        setName(name);
+    }
+
     /**
      * {@inheritDoc}
      */

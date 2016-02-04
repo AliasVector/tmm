@@ -11,6 +11,13 @@ public class RotationalPair extends AbstractKinematicPair {
     private final KinematicClass kinematicClass = KinematicClass.P4;
     private double angle;
 
+    public RotationalPair() {
+    }
+
+    public RotationalPair(final String name) {
+        setName(name);
+    }
+
     @Override
     public KinematicClass getKinematicClass() {
         return kinematicClass;
