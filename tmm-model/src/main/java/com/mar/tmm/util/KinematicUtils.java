@@ -22,12 +22,11 @@ public final class KinematicUtils {
      * @param elementUnit unit to be used as element owner
      * @param offsetX     offset for x for disposition object
      * @param offsetY     offset for y for disposition object
-     * @param angle       angle for disposition object
      *
      * @return anonymous class {@link com.mar.tmm.model.Unit.Element} instance
      */
     public static Unit.Element createElementForUnit(final Unit elementUnit, final double offsetX,
-        final double offsetY, final double angle) {
+        final double offsetY) {
 
         if (elementUnit == null) {
             throw new IllegalArgumentException("Unit cannot be null for element creation");
@@ -35,7 +34,7 @@ public final class KinematicUtils {
 
         final Unit.Element result = new Unit.Element() {
             private Unit unit = elementUnit;
-            private Disposition disposition = new Disposition(offsetX, offsetY, angle);
+            private Disposition disposition = new Disposition(offsetX, offsetY);
 
             @Override
             public Unit getUnit() {

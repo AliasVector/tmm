@@ -9,15 +9,13 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class Disposition {
     private double offsetX;
     private double offsetY;
-    private double angle;
 
     public Disposition() {
     }
 
-    public Disposition(final double offsetX, final double offsetY, final double angle) {
+    public Disposition(final double offsetX, final double offsetY) {
         this.offsetX = offsetX;
         this.offsetY = offsetY;
-        this.angle = angle;
     }
 
     public double getOffsetX() {
@@ -36,20 +34,11 @@ public class Disposition {
         this.offsetY = offsetY;
     }
 
-    public double getAngle() {
-        return angle;
-    }
-
-    public void setAngle(final double angle) {
-        this.angle = angle;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
             .append("offsetX", offsetX)
             .append("offsetY", offsetY)
-            .append("angle", angle)
             .toString();
     }
 }

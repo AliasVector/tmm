@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Helper class for tmm elements.
+ * Helper class for tmm groups.
  */
 public final class GroupUtils {
     public static final int DEFAULT_LEVER_LENGTH = 20;
@@ -106,11 +106,11 @@ public final class GroupUtils {
         unit.setName(unitName);
         unit.setLength(DEFAULT_LEVER_LENGTH);
 
-        final Unit.Element firstUnitElement = KinematicUtils.createElementForUnit(unit, 0, 0, 0);
+        final Unit.Element firstUnitElement = KinematicUtils.createElementForUnit(unit, 0, 0);
         unit.getElements().add(firstUnitElement);
         pair1.setElement2(firstUnitElement);
 
-        final Unit.Element secondUnitElement = KinematicUtils.createElementForUnit(unit, unit.getLength(), 0, 0);
+        final Unit.Element secondUnitElement = KinematicUtils.createElementForUnit(unit, unit.getLength(), 0);
         unit.getElements().add(secondUnitElement);
         pair2.setElement1(secondUnitElement);
     }
