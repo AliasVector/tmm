@@ -75,7 +75,17 @@
 			<!--Modules-->
 			<dependency>
 				<groupId>com.mar</groupId>
+				<artifactId>tmm-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mar</groupId>
 				<artifactId>tmm-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mar</groupId>
+				<artifactId>tmm-io</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
@@ -107,5 +117,7 @@
 
 	<modules>
 		<module>tmm-model</module>
+		<module>tmm-io</module>
+		<module>tmm-common</module>
 	</modules>
 </project>
