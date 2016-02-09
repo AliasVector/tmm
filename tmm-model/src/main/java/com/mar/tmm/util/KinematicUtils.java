@@ -1,8 +1,8 @@
 package com.mar.tmm.util;
 
-import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.Disposition;
+import com.mar.tmm.model.impl.unit.DefaultElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,25 +32,9 @@ public final class KinematicUtils {
             throw new IllegalArgumentException("Unit cannot be null for element creation");
         }
 
-        final Unit.Element result = new Unit.Element() {
-            private Unit unit = elementUnit;
-            private Disposition disposition = new Disposition(offsetX, offsetY);
-
-            @Override
-            public Unit getUnit() {
-                return unit;
-            }
-
-            @Override
-            public Disposition getDisposition() {
-                return disposition;
-            }
-
-            @Override
-            public KinematicPair getKinematicPair() {
-                return null;
-            }
-        };
+        final DefaultElement result = new DefaultElement();
+        result.setUnit(elementUnit);
+        result.setDisposition(new Disposition(offsetX, offsetY));
 
         elementUnit.getElements().add(result);
         return result;

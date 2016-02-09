@@ -1,15 +1,25 @@
 package com.mar.tmm.model.impl.kinematicpair;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Describes translational kinematic pair.
  */
+@XmlType(name = "TranslationalPair")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TranslationalPair extends AbstractKinematicPair {
 
+    @XmlElement
     private final KinematicClass kinematicClass = KinematicClass.P4;
-    private double movement;
+
+    @XmlElement(name = "movement")
+    private double movement = 0;
 
     public TranslationalPair() {
     }

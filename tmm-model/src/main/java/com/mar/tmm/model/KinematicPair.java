@@ -1,5 +1,8 @@
 package com.mar.tmm.model;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlType;
+
 import com.mar.tmm.model.impl.Disposition;
 
 /**
@@ -44,7 +47,9 @@ public interface KinematicPair {
     /**
      * Enum with classes of kinematic pairs.
      */
-    public static enum KinematicClass {
+    @XmlType(name = "KinematicClass")
+    @XmlEnum
+    enum KinematicClass {
         P4(1),
         P5(2);
 

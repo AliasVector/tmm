@@ -46,5 +46,10 @@ public interface Unit {
          * @return {@link KinematicPair} instance
          */
         KinematicPair getKinematicPair();
+
+        /**
+         * Sets kinematic pair to this element.
+         */
+        void setKinematicPair(KinematicPair kinematicPair);
     }
 }

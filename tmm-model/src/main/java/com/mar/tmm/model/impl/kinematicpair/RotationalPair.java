@@ -1,15 +1,25 @@
 package com.mar.tmm.model.impl.kinematicpair;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Describes rotational kinematic pair.
  */
+@XmlType(name = "RotationalPair")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RotationalPair extends AbstractKinematicPair {
 
+    @XmlElement
     private final KinematicClass kinematicClass = KinematicClass.P4;
-    private double angle;
+
+    @XmlElement(name = "angle")
+    private double angle = 0;
 
     public RotationalPair() {
     }

@@ -1,13 +1,22 @@
 package com.mar.tmm.model.impl;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Describes the location of related element.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Disposition {
+
+    @XmlAttribute(name = "offsetX")
     private double offsetX;
+
+    @XmlAttribute(name = "offsetY")
     private double offsetY;
 
     public Disposition() {

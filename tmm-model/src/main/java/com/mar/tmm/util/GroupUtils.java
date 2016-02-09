@@ -109,9 +109,11 @@ public final class GroupUtils {
         final Unit.Element firstUnitElement = KinematicUtils.createElementForUnit(unit, 0, 0);
         unit.getElements().add(firstUnitElement);
         pair1.setElement2(firstUnitElement);
+        firstUnitElement.setKinematicPair(pair1);
 
         final Unit.Element secondUnitElement = KinematicUtils.createElementForUnit(unit, unit.getLength(), 0);
         unit.getElements().add(secondUnitElement);
         pair2.setElement1(secondUnitElement);
+        secondUnitElement.setKinematicPair(pair2);
     }
 }

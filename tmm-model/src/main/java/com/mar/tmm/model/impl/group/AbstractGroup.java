@@ -3,6 +3,9 @@ package com.mar.tmm.model.impl.group;
 import java.util.List;
 import java.util.Set;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mar.tmm.model.Group;
@@ -14,6 +17,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * Abstract group functionality.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class AbstractGroup implements Group {
     private static final int UNITS_RATE = 3;
     private static final int P5_RATE = 2;
