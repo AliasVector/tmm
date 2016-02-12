@@ -38,11 +38,25 @@ public interface KinematicPair {
     Unit.Element getElement1();
 
     /**
+     * Sets element1
+     *
+     * @param element1 element to be set as element 1
+     */
+    void setElement1(Unit.Element element1);
+
+    /**
      * Returns the connected element of some unit.
      *
      * @return {@link Unit.Element} instance
      */
     Unit.Element getElement2();
+
+    /**
+     * Sets element2
+     *
+     * @param element2 element to be set as element 2
+     */
+    void setElement2(Unit.Element element2);
 
     /**
      * Enum with classes of kinematic pairs.

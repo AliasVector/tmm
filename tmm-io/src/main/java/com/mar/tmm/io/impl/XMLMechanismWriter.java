@@ -76,7 +76,7 @@ public class XMLMechanismWriter implements MechanismWriter {
             }
         }
 
-        if (file.canWrite()) {
+        if (!file.canWrite()) {
             LOGGER.error("Access denied to the xml destination: {}", xmlDestination);
             throw new IllegalStateException("Access denied to the xml destination");
         }

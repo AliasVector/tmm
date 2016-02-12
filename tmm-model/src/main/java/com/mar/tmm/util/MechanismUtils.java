@@ -29,11 +29,11 @@ public final class MechanismUtils {
      * @return {@link DefaultMechanism} instance
      */
     public static DefaultMechanism createMechanismWithRotationKinematicPair(final String name, final String pairName,
-        final String rackName) {
+        final String rackName, final String leverName) {
 
         LOGGER.trace("Start creating mechanism with rotation kinematic pair...");
 
-        final DefaultMechanism result = createMechanism(name, new RotationalPair(), pairName, rackName);
+        final DefaultMechanism result = createMechanism(name, new RotationalPair(), pairName, rackName, leverName);
 
         LOGGER.debug("Finished creating mechanism with rotation kinematic pair: {}", result);
         return result;
@@ -51,28 +51,32 @@ public final class MechanismUtils {
      * @return {@link DefaultMechanism} instance
      */
     public static DefaultMechanism createMechanismWithTranslationalKinematicPair(final String name,
-        final String pairName, final String rackName) {
+        final String pairName, final String rackName, final String leverName) {
 
         LOGGER.trace("Start creating mechanism with translational kinematic pair...");
 
-        final DefaultMechanism result = createMechanism(name, new TranslationalPair(), pairName, rackName);
+        final DefaultMechanism result = createMechanism(name, new TranslationalPair(), pairName, rackName, leverName);
 
         LOGGER.debug("Finished creating mechanism with translational kinematic pair: {}", result);
         return result;
     }
 
     private static DefaultMechanism createMechanism(final String name, final AbstractKinematicPair pair,
-        final String pairName, final String rackName) {
+        final String pairName, final String rackName, final String leverName) {
 
         final DefaultMechanism result = new DefaultMechanism();
         result.setName(name);
-        result.getRack().setName(rackName);
+        result.getRackUnit().setName(rackName);
 
         pair.setName(pairName);
 
-        final Unit.Element element = KinematicUtils.createElementForUnit(result.getRack(), 0, 0);
-        element.setKinematicPair(pair);
-        pair.setElement1(element);
+        final Unit.Element rack = KinematicUtils.createElementForUnit(result.getRackUnit(), 0, 0);
+        rack.setKinematicPair(pair);
+        pair.setElement1(rack);
+
+        final Unit.Element lever = KinematicUtils.createElementForUnit(result.getLeverUnit(), 0, 0);
+        lever.setKinematicPair(pair);
+        pair.setElement2(lever);
 
         return result;
     }

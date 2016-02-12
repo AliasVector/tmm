@@ -34,6 +34,9 @@ public abstract class AbstractKinematicPair implements KinematicPair {
         this.name = name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Disposition getDisposition() {
         return disposition;
@@ -43,20 +46,34 @@ public abstract class AbstractKinematicPair implements KinematicPair {
         this.disposition = disposition;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Unit.Element getElement1() {
         return element1;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setElement1(final Unit.Element element1) {
         this.element1 = element1;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Unit.Element getElement2() {
         return element2;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setElement2(final Unit.Element element2) {
         this.element2 = element2;
     }
