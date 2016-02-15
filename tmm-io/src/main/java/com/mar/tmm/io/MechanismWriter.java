@@ -13,5 +13,5 @@ public interface MechanismWriter {
      *
      * @param mechanism mechanism to be written
      */
-    <T extends Mechanism> void writeMechanism(T mechanism) throws TmmException;
+    <T extends Mechanism> void writeMechanism(T mechanism, boolean prettyView) throws TmmException;
 }

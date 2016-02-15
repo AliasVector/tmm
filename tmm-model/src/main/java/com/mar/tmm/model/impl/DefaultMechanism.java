@@ -3,6 +3,7 @@ package com.mar.tmm.model.impl;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -39,7 +40,7 @@ public class DefaultMechanism implements Mechanism {
     @XmlElement
     private AbstractKinematicPair kinematicPair;
 
-    @XmlElement
+    @XmlAnyElement
     @XmlElementWrapper(name = "Groups")
     private List<Group> groups = Lists.newArrayList();
 

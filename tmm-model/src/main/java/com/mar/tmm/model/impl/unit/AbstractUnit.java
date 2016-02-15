@@ -3,8 +3,8 @@ package com.mar.tmm.model.impl.unit;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
 import com.google.common.collect.Lists;
@@ -20,7 +20,7 @@ public abstract class AbstractUnit implements Unit {
     @XmlAttribute(name = "name")
     private String name;
 
-    @XmlElement
+    @XmlAnyElement
     @XmlElementWrapper(name = "elements")
     private List<Element> elements = Lists.newArrayList();
 

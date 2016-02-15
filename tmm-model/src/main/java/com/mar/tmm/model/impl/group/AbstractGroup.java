@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlAttribute;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -22,7 +24,10 @@ public abstract class AbstractGroup implements Group {
     private static final int UNITS_RATE = 3;
     private static final int P5_RATE = 2;
 
+    @XmlAttribute
     private String name;
+
+    @XmlAnyElement
     private List<KinematicPair> kinematicPairs = Lists.newArrayList();
 
     @Override

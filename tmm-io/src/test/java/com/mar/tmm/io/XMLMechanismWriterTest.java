@@ -47,7 +47,7 @@ public class XMLMechanismWriterTest {
         final Mechanism testMechanism = createTestRotationMechanism();
 
         final XMLMechanismWriter writer = XMLMechanismWriter.createInstance(TEST_XML_FILE);
-        writer.writeMechanism(testMechanism);
+        writer.writeMechanism(testMechanism, true);
 
         checkXMLFile(TEST_XML_FILE);
     }

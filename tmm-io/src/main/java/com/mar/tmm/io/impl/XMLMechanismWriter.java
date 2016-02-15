@@ -7,6 +7,14 @@ import javax.xml.bind.Marshaller;
 import com.mar.tmm.io.MechanismWriter;
 import com.mar.tmm.io.exception.TmmIOException;
 import com.mar.tmm.model.Mechanism;
+import com.mar.tmm.model.impl.group.FirstTypeGroup;
+import com.mar.tmm.model.impl.group.SecondTypeGroup;
+import com.mar.tmm.model.impl.kinematicpair.RotationalPair;
+import com.mar.tmm.model.impl.kinematicpair.TranslationalPair;
+import com.mar.tmm.model.impl.unit.DefaultElement;
+import com.mar.tmm.model.impl.unit.LeverUnit;
+import com.mar.tmm.model.impl.unit.RackUnit;
+import com.mar.tmm.model.impl.unit.SlideUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +37,7 @@ public class XMLMechanismWriter implements MechanismWriter {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public <T extends Mechanism> void writeMechanism(final T mechanism) {
+    public <T extends Mechanism> void writeMechanism(final T mechanism, final boolean prettyView) {
         if (mechanism == null) {
             throw new IllegalArgumentException("Mechanism cannot be null for marshalling");
         }
@@ -38,8 +46,11 @@ public class XMLMechanismWriter implements MechanismWriter {
         try {
             final File targetFile = new File(destination);
 
-            final JAXBContext context = JAXBContext.newInstance(mechanism.getClass());
+            final JAXBContext context = JAXBContext.newInstance(mechanism.getClass(), DefaultElement.class,
+                RotationalPair.class, TranslationalPair.class, FirstTypeGroup.class, SecondTypeGroup.class,
+                RackUnit.class, LeverUnit.class, SlideUnit.class);
             final Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, prettyView);
             marshaller.marshal(mechanism, targetFile);
             LOGGER.debug("Mechanism: {} is successfully marshalled into file: {}", mechanism, destination);
         } catch (final Exception e) {
