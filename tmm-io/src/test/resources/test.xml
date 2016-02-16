@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DefaultMechanism name="Test mechanism">
+    <Rack name="First rack">
+        <elements>
+            <DefaultElement>
+                <disposition offsetX="0.0" offsetY="0.0"/>
+                <RotationalPair name="First rotation pair">
+                    <disposition offsetX="0.0" offsetY="0.0"/>
+                    <kinematicClass>P4</kinematicClass>
+                    <angle>0.0</angle>
+                </RotationalPair>
+            </DefaultElement>
+        </elements>
+    </Rack>
+    <LeverUnit>
+        <elements>
+            <DefaultElement>
+                <disposition offsetX="0.0" offsetY="0.0"/>
+                <RotationalPair name="First rotation pair">
+                    <disposition offsetX="0.0" offsetY="0.0"/>
+                    <kinematicClass>P4</kinematicClass>
+                    <angle>0.0</angle>
+                </RotationalPair>
+            </DefaultElement>
+            <DefaultElement>
+                <disposition offsetX="0.0" offsetY="0.0"/>
+                <RotationalPair name="Ext pair 1">
+                    <disposition offsetX="0.0" offsetY="0.0"/>
+                    <kinematicClass>P4</kinematicClass>
+                    <angle>0.0</angle>
+                </RotationalPair>
+            </DefaultElement>
+        </elements>
+        <length>0.0</length>
+    </LeverUnit>
+    <Groups>
+        <FirstTypeGroup name="Test group 1">
+            <RotationalPair name="Ext pair 1">
+                <disposition offsetX="0.0" offsetY="0.0"/>
+                <kinematicClass>P4</kinematicClass>
+                <angle>0.0</angle>
+            </RotationalPair>
+            <RotationalPair name="Ext pair 2">
+                <disposition offsetX="0.0" offsetY="0.0"/>
+                <kinematicClass>P4</kinematicClass>
+                <angle>0.0</angle>
+            </RotationalPair>
+        </FirstTypeGroup>
+    </Groups>
+</DefaultMechanism>
