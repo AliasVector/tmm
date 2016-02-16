@@ -77,6 +77,6 @@ public class XMLMechanismWriterTest {
         writer.writeMechanism(testMechanism, true);
 
         checkXMLFile(TEST_XML_FILE);
-        removeXMLFile(TEST_XML_FILE);
+//        removeXMLFile(TEST_XML_FILE);
     }
 }

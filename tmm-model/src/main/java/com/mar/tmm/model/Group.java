@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Interface to describe the common behavior for mechanism group.
  */
-public interface Group {
+public interface Group extends EntityWithId {
 
     /**
      * Returns the type of the group.

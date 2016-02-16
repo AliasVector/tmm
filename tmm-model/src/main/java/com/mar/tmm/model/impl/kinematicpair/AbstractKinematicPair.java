@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.Disposition;
+import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -17,6 +18,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class AbstractKinematicPair implements KinematicPair {
+
+    @XmlAttribute(name = "id")
+    private String id = MechanismUtils.generateId();
 
     @XmlAttribute
     private String name;
@@ -31,6 +35,18 @@ public abstract class AbstractKinematicPair implements KinematicPair {
     private Unit.Element element2;
 
     public AbstractKinematicPair() {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    public void setId(final String id) {
+        this.id = id;
     }
 
     /**
@@ -95,6 +111,7 @@ public abstract class AbstractKinematicPair implements KinematicPair {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+            .append("id", id)
             .append("name", name)
             .append("disposition", disposition)
             .append("element1", element1)

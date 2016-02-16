@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 
 import com.google.common.collect.Lists;
 import com.mar.tmm.model.Unit;
+import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -17,6 +18,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class AbstractUnit implements Unit {
+
+    @XmlAttribute(name = "id")
+    private String id = MechanismUtils.generateId();
+
     @XmlAttribute(name = "name")
     private String name;
 
@@ -25,6 +30,18 @@ public abstract class AbstractUnit implements Unit {
     private List<Element> elements = Lists.newArrayList();
 
     public AbstractUnit() {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    public void setId(final String id) {
+        this.id = id;
     }
 
     /**
@@ -63,6 +80,7 @@ public abstract class AbstractUnit implements Unit {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+            .append("id", id)
             .append("name", name)
             .append("elements", elements)
             .toString();

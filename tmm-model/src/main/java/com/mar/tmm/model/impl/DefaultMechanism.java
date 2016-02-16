@@ -18,6 +18,7 @@ import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
 import com.mar.tmm.model.impl.unit.LeverUnit;
 import com.mar.tmm.model.impl.unit.RackUnit;
 import com.mar.tmm.util.KinematicUtils;
+import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -27,6 +28,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @XmlRootElement(name = "DefaultMechanism")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DefaultMechanism implements Mechanism {
+
+    @XmlAttribute(name = "id")
+    private String id = MechanismUtils.generateId();
 
     @XmlAttribute(name = "name")
     private String name;
@@ -47,6 +51,18 @@ public class DefaultMechanism implements Mechanism {
     public DefaultMechanism() {
         rackUnit = new RackUnit();
         leverUnit = new LeverUnit();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    public void setId(final String id) {
+        this.id = id;
     }
 
     /**
@@ -133,11 +149,31 @@ public class DefaultMechanism implements Mechanism {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+            .append("id", id)
             .append("name", name)
             .append("rackUnit", rackUnit)
             .append("leverUnit", leverUnit)
             .append("kinematicPair", kinematicPair)
             .append("groups", groups)
             .toString();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DefaultMechanism that = (DefaultMechanism) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        return !(name != null ? !name.equals(that.name) : that.name != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }

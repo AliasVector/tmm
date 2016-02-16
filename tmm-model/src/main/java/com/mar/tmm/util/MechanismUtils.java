@@ -1,5 +1,7 @@
 package com.mar.tmm.util;
 
+import java.util.UUID;
+
 import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.DefaultMechanism;
 import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
@@ -15,6 +17,10 @@ public final class MechanismUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(MechanismUtils.class);
 
     private MechanismUtils() {
+    }
+
+    public static String generateId() {
+        return UUID.randomUUID().toString().replace("-", "");
     }
 
     /**

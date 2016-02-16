@@ -7,7 +7,7 @@ import com.mar.tmm.model.impl.Disposition;
 /**
  * Interface to describe the common behavior for mechanism group's unit.
  */
-public interface Unit {
+public interface Unit extends EntityWithId {
     /**
      * Returns the name of the unit.
      *
@@ -25,7 +25,7 @@ public interface Unit {
     /**
      * Defines element which connects the unit to kinematic pair.
      */
-    interface Element {
+    interface Element extends EntityWithId {
         /**
          * Returns the respected unit which this element belongs to.
          *а

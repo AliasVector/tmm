@@ -2,7 +2,6 @@ package com.mar.tmm.model.impl.group;
 
 import java.util.List;
 import java.util.Set;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyElement;
@@ -13,6 +12,7 @@ import com.google.common.collect.Sets;
 import com.mar.tmm.model.Group;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Unit;
+import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -24,11 +24,26 @@ public abstract class AbstractGroup implements Group {
     private static final int UNITS_RATE = 3;
     private static final int P5_RATE = 2;
 
+    @XmlAttribute(name = "id")
+    private String id = MechanismUtils.generateId();
+
     @XmlAttribute
     private String name;
 
     @XmlAnyElement
     private List<KinematicPair> kinematicPairs = Lists.newArrayList();
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    public void setId(final String id) {
+        this.id = id;
+    }
 
     @Override
     public String getName() {
@@ -49,14 +64,6 @@ public abstract class AbstractGroup implements Group {
 
     public void setExternalKinematicPairs(final List<KinematicPair> kinematicPairs) {
         this.kinematicPairs = kinematicPairs;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
-            .append("name", name)
-            .append("kinematicPairs", kinematicPairs)
-            .toString();
     }
 
     /**
@@ -109,5 +116,14 @@ public abstract class AbstractGroup implements Group {
         // Remove kinematic pair itself
         result.remove(kinematicPair);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+            .append("id", id)
+            .append("name", name)
+            .append("kinematicPairs", kinematicPairs)
+            .toString();
     }
 }

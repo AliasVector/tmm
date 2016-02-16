@@ -3,6 +3,7 @@ package com.mar.tmm.model.impl.unit;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -10,6 +11,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.Disposition;
+import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -20,6 +22,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DefaultElement implements Unit.Element {
 
+    @XmlAttribute(name = "id")
+    private String id = MechanismUtils.generateId();
+
     @XmlTransient
     private Unit unit;
 
@@ -28,6 +33,18 @@ public class DefaultElement implements Unit.Element {
 
     @XmlAnyElement
     private KinematicPair kinematicPair;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    public void setId(final String id) {
+        this.id = id;
+    }
 
     @Override
     public Unit getUnit() {
@@ -60,6 +77,7 @@ public class DefaultElement implements Unit.Element {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+            .append("id", id)
             .append("unit", unit)
             .append("disposition", disposition)
             .append("kinematicPair", kinematicPair)

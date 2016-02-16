@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.mar.tmm.model.GroupType;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Class of the group of the second type. This group contains one rotational external pair, one rotational internal
@@ -28,5 +30,12 @@ public class SecondTypeGroup extends AbstractGroup {
     @Override
     public GroupType getType() {
         return TYPE;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
+            .appendSuper(super.toString())
+            .toString();
     }
 }

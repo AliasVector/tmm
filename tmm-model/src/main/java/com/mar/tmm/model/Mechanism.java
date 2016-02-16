@@ -8,7 +8,7 @@ import com.mar.tmm.model.impl.unit.RackUnit;
 /**
  * Interface to describe the common behavior for all kind of mechanisms.
  */
-public interface Mechanism {
+public interface Mechanism extends EntityWithId {
     /**
      * Returns groups related to this mechanism.
      *
