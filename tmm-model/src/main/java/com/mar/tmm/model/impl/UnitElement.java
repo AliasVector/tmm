@@ -85,9 +85,9 @@ public class UnitElement implements EntityWithId {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
             .append("id", id)
-            .append("unit", unit)
+            .append("unit.id", unit == null ? "" : unit.getId())
             .append("disposition", disposition)
-            .append("kinematicPair", kinematicPair)
+            .append("kinematicPair.id", kinematicPair == null ? "" : kinematicPair.getId())
             .toString();
     }
 }

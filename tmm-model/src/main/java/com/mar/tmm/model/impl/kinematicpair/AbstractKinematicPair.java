@@ -113,8 +113,8 @@ public abstract class AbstractKinematicPair implements KinematicPair {
             .append("id", id)
             .append("name", name)
             .append("disposition", disposition)
-            .append("unitElement1.id", unitElement1 == null ? null : unitElement1.getId())
-            .append("unitElement2.id", unitElement2 == null ? null : unitElement2.getId())
+            .append("unitElement1", unitElement1)
+            .append("unitElement2", unitElement2)
             .toString();
     }
 }
