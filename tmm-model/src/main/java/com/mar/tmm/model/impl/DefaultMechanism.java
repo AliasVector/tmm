@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.common.collect.Lists;
@@ -30,6 +31,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class DefaultMechanism implements Mechanism {
 
     @XmlAttribute(name = "id")
+    @XmlID
     private String id = MechanismUtils.generateId();
 
     @XmlAttribute(name = "name")

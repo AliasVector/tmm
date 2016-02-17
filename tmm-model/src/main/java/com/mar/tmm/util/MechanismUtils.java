@@ -72,8 +72,11 @@ public final class MechanismUtils {
 
         final DefaultMechanism result = new DefaultMechanism();
         result.setName(name);
-        result.getRackUnit().setName(rackName);
 
+        result.getRackUnit().setName(rackName);
+        result.getLeverUnit().setName(leverName);
+
+        result.setKinematicPair(pair);
         pair.setName(pairName);
 
         final Unit.Element rack = KinematicUtils.createElementForUnit(result.getRackUnit(), 0, 0);

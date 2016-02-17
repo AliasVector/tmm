@@ -2,9 +2,9 @@ package com.mar.tmm.model.impl.kinematicpair;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Unit;
@@ -28,10 +28,10 @@ public abstract class AbstractKinematicPair implements KinematicPair {
     @XmlElement
     private Disposition disposition = new Disposition();
 
-    @XmlTransient
+    @XmlAnyElement
     private Unit.Element element1;
 
-    @XmlTransient
+    @XmlAnyElement
     private Unit.Element element2;
 
     public AbstractKinematicPair() {
@@ -114,8 +114,8 @@ public abstract class AbstractKinematicPair implements KinematicPair {
             .append("id", id)
             .append("name", name)
             .append("disposition", disposition)
-            .append("element1.id", element1.getId())
-            .append("element2.id", element2.getId())
+            .append("element1.id", element1 == null ? null : element1.getId())
+            .append("element2.id", element2 == null ? null : element2.getId())
             .toString();
     }
 }

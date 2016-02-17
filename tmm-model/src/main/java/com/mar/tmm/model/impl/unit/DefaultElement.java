@@ -1,10 +1,11 @@
 package com.mar.tmm.model.impl.unit;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -23,6 +24,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class DefaultElement implements Unit.Element {
 
     @XmlAttribute(name = "id")
+    @XmlID
     private String id = MechanismUtils.generateId();
 
     @XmlTransient
@@ -31,8 +33,16 @@ public class DefaultElement implements Unit.Element {
     @XmlElement(name = "disposition")
     private Disposition disposition;
 
-    @XmlAnyElement
+    @XmlTransient
     private KinematicPair kinematicPair;
+
+    public void afterUnmarshal(final Unmarshaller unmarshaller, final Object parent) {
+        if (parent instanceof Unit) {
+            this.unit = (Unit) parent;
+        } else if (parent instanceof KinematicPair) {
+            this.kinematicPair = (KinematicPair) parent;
+        }
+    }
 
     /**
      * {@inheritDoc}

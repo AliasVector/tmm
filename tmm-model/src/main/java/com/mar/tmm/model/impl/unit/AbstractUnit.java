@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
 
 import com.google.common.collect.Lists;
 import com.mar.tmm.model.Unit;
@@ -20,6 +21,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public abstract class AbstractUnit implements Unit {
 
     @XmlAttribute(name = "id")
+    @XmlID
     private String id = MechanismUtils.generateId();
 
     @XmlAttribute(name = "name")
