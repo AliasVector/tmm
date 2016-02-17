@@ -2,13 +2,12 @@ package com.mar.tmm.model.impl.kinematicpair;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 import com.mar.tmm.model.KinematicPair;
-import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.Disposition;
+import com.mar.tmm.model.impl.UnitElement;
 import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -28,11 +27,11 @@ public abstract class AbstractKinematicPair implements KinematicPair {
     @XmlElement
     private Disposition disposition = new Disposition();
 
-    @XmlAnyElement
-    private Unit.Element element1;
+    @XmlElement(name = "Element1")
+    private UnitElement unitElement1;
 
-    @XmlAnyElement
-    private Unit.Element element2;
+    @XmlElement(name = "Element2")
+    private UnitElement unitElement2;
 
     public AbstractKinematicPair() {
     }
@@ -77,32 +76,32 @@ public abstract class AbstractKinematicPair implements KinematicPair {
      * {@inheritDoc}
      */
     @Override
-    public Unit.Element getElement1() {
-        return element1;
+    public UnitElement getUnitElement1() {
+        return unitElement1;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setElement1(final Unit.Element element1) {
-        this.element1 = element1;
+    public void setUnitElement1(final UnitElement unitElement1) {
+        this.unitElement1 = unitElement1;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Unit.Element getElement2() {
-        return element2;
+    public UnitElement getUnitElement2() {
+        return unitElement2;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setElement2(final Unit.Element element2) {
-        this.element2 = element2;
+    public void setUnitElement2(final UnitElement unitElement2) {
+        this.unitElement2= unitElement2;
     }
 
     /**
@@ -114,8 +113,8 @@ public abstract class AbstractKinematicPair implements KinematicPair {
             .append("id", id)
             .append("name", name)
             .append("disposition", disposition)
-            .append("element1.id", element1 == null ? null : element1.getId())
-            .append("element2.id", element2 == null ? null : element2.getId())
+            .append("unitElement1.id", unitElement1 == null ? null : unitElement1.getId())
+            .append("unitElement2.id", unitElement2 == null ? null : unitElement2.getId())
             .toString();
     }
 }

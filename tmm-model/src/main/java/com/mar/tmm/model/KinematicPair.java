@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
 import com.mar.tmm.model.impl.Disposition;
+import com.mar.tmm.model.impl.UnitElement;
 
 /**
  * Interface to describe the common behavior for mechanism group's element.
@@ -33,30 +34,30 @@ public interface KinematicPair extends EntityWithId {
     /**
      * Returns the connected element of some unit.
      *
-     * @return {@link Unit.Element} instance
+     * @return {@link UnitElement} instance
      */
-    Unit.Element getElement1();
+    UnitElement getUnitElement1();
 
     /**
      * Sets element1
      *
      * @param element1 element to be set as element 1
      */
-    void setElement1(Unit.Element element1);
+    void setUnitElement1(UnitElement element1);
 
     /**
      * Returns the connected element of some unit.
      *
-     * @return {@link Unit.Element} instance
+     * @return {@link UnitElement} instance
      */
-    Unit.Element getElement2();
+    UnitElement getUnitElement2();
 
     /**
      * Sets element2
      *
      * @param element2 element to be set as element 2
      */
-    void setElement2(Unit.Element element2);
+    void setUnitElement2(UnitElement element2);
 
     /**
      * Enum with classes of kinematic pairs.

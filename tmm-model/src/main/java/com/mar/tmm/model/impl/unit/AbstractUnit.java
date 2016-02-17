@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlID;
 
 import com.google.common.collect.Lists;
 import com.mar.tmm.model.Unit;
+import com.mar.tmm.model.impl.UnitElement;
 import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -29,7 +30,7 @@ public abstract class AbstractUnit implements Unit {
 
     @XmlAnyElement
     @XmlElementWrapper(name = "elements")
-    private List<Element> elements = Lists.newArrayList();
+    private List<UnitElement> elements = Lists.newArrayList();
 
     public AbstractUnit() {
     }
@@ -62,15 +63,15 @@ public abstract class AbstractUnit implements Unit {
      * {@inheritDoc}
      */
     @Override
-    public List<Element> getElements() {
+    public List<UnitElement> getElements() {
         return elements;
     }
 
-    public void setElements(final List<Element> elements) {
+    public void setElements(final List<UnitElement> elements) {
         this.elements = elements;
     }
 
-    public void addElement(final Element element) {
+    public void addElement(final UnitElement element) {
         if (element != null) {
             elements.add(element);
         }

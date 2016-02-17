@@ -2,7 +2,7 @@ package com.mar.tmm.model;
 
 import java.util.List;
 
-import com.mar.tmm.model.impl.Disposition;
+import com.mar.tmm.model.impl.UnitElement;
 
 /**
  * Interface to describe the common behavior for mechanism group's unit.
@@ -18,38 +18,7 @@ public interface Unit extends EntityWithId {
     /**
      * Return elements of this unit. Each element allows connect this unit to kinematic pair.
      *
-     * @return list of {@link Element} instances
+     * @return list of {@link UnitElement} instances
      */
-    List<Element> getElements();
-
-    /**
-     * Defines element which connects the unit to kinematic pair.
-     */
-    interface Element extends EntityWithId {
-        /**
-         * Returns the respected unit which this element belongs to.
-         *а
-         * @return {@link Unit} instance
-         */
-        Unit getUnit();
-
-        /**
-         * Returns the disposition of this element inside Unit.
-         *
-         * @return {@link Disposition} instance
-         */
-        Disposition getDisposition();
-
-        /**
-         * Returns the related kinematic pair.
-         *
-         * @return {@link KinematicPair} instance
-         */
-        KinematicPair getKinematicPair();
-
-        /**
-         * Sets kinematic pair to this element.
-         */
-        void setKinematicPair(KinematicPair kinematicPair);
-    }
+    List<UnitElement> getElements();
 }

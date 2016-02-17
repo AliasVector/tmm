@@ -11,7 +11,7 @@ import com.mar.tmm.model.impl.group.FirstTypeGroup;
 import com.mar.tmm.model.impl.group.SecondTypeGroup;
 import com.mar.tmm.model.impl.kinematicpair.RotationalPair;
 import com.mar.tmm.model.impl.kinematicpair.TranslationalPair;
-import com.mar.tmm.model.impl.unit.DefaultElement;
+import com.mar.tmm.model.impl.UnitElement;
 import com.mar.tmm.model.impl.unit.LeverUnit;
 import com.mar.tmm.model.impl.unit.RackUnit;
 import com.mar.tmm.model.impl.unit.SlideUnit;
@@ -46,7 +46,7 @@ public class XMLMechanismWriter implements MechanismWriter {
         try {
             final File targetFile = new File(destination);
 
-            final JAXBContext context = JAXBContext.newInstance(mechanism.getClass(), DefaultElement.class,
+            final JAXBContext context = JAXBContext.newInstance(mechanism.getClass(), UnitElement.class,
                 RotationalPair.class, TranslationalPair.class, FirstTypeGroup.class, SecondTypeGroup.class,
                 RackUnit.class, LeverUnit.class, SlideUnit.class);
             final Marshaller marshaller = context.createMarshaller();

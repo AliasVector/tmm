@@ -14,7 +14,6 @@ import com.google.common.collect.Lists;
 import com.mar.tmm.model.Group;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Mechanism;
-import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
 import com.mar.tmm.model.impl.unit.LeverUnit;
 import com.mar.tmm.model.impl.unit.RackUnit;
@@ -92,7 +91,7 @@ public class DefaultMechanism implements Mechanism {
             throw new IllegalArgumentException("Cannot connect null kinematic pair to mechanism");
         }
 
-        if (groupPair.getElement1() != null && groupPair.getElement2() != null) {
+        if (groupPair.getUnitElement1() != null && groupPair.getUnitElement2() != null) {
             throw new IllegalStateException("Kinematic pair doesn't have free element to connect");
         }
 
@@ -101,13 +100,13 @@ public class DefaultMechanism implements Mechanism {
                 + "was not initialized");
         }
 
-        final Unit.Element element = KinematicUtils.createElementForUnit(leverUnit, leverUnit.getLength(), 0);
-        if (groupPair.getElement1() == null) {
-            groupPair.setElement1(element);
+        final UnitElement unitElement = KinematicUtils.createElementForUnit(leverUnit, leverUnit.getLength(), 0);
+        if (groupPair.getUnitElement1() == null) {
+            groupPair.setUnitElement1(unitElement);
         } else {
-            groupPair.setElement2(element);
+            groupPair.setUnitElement2(unitElement);
         }
-        element.setKinematicPair(groupPair);
+        unitElement.setKinematicPair(groupPair);
 
         groups.add(group);
     }

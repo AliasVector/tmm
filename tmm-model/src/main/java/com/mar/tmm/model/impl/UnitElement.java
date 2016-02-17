@@ -1,4 +1,4 @@
-package com.mar.tmm.model.impl.unit;
+package com.mar.tmm.model.impl;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.mar.tmm.model.EntityWithId;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.Disposition;
@@ -21,7 +22,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 @XmlRootElement(name = "DefaultElement")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DefaultElement implements Unit.Element {
+public class UnitElement implements EntityWithId {
 
     @XmlAttribute(name = "id")
     @XmlID
@@ -56,7 +57,6 @@ public class DefaultElement implements Unit.Element {
         this.id = id;
     }
 
-    @Override
     public Unit getUnit() {
         return unit;
     }
@@ -65,7 +65,6 @@ public class DefaultElement implements Unit.Element {
         this.unit = unit;
     }
 
-    @Override
     public Disposition getDisposition() {
         return disposition;
     }
@@ -74,12 +73,10 @@ public class DefaultElement implements Unit.Element {
         this.disposition = disposition;
     }
 
-    @Override
     public KinematicPair getKinematicPair() {
         return kinematicPair;
     }
 
-    @Override
     public void setKinematicPair(final KinematicPair kinematicPair) {
         this.kinematicPair = kinematicPair;
     }

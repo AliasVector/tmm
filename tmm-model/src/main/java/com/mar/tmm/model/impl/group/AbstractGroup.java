@@ -12,6 +12,7 @@ import com.google.common.collect.Sets;
 import com.mar.tmm.model.Group;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Unit;
+import com.mar.tmm.model.impl.UnitElement;
 import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -92,11 +93,11 @@ public abstract class AbstractGroup implements Group {
                 p5Pairs.add(pair);
             }
 
-            if (pair.getElement1() != null) {
-                units.add(pair.getElement1().getUnit());
+            if (pair.getUnitElement1() != null) {
+                units.add(pair.getUnitElement1().getUnit());
             }
-            if (pair.getElement2() != null) {
-                units.add(pair.getElement2().getUnit());
+            if (pair.getUnitElement2() != null) {
+                units.add(pair.getUnitElement2().getUnit());
             }
 
             for (final KinematicPair sibling : getSiblingsKinematicPairs(pair)) {
@@ -107,8 +108,8 @@ public abstract class AbstractGroup implements Group {
 
     private Set<KinematicPair> getSiblingsKinematicPairs(final KinematicPair kinematicPair) {
         final Set<KinematicPair> result = Sets.newHashSet();
-        if (kinematicPair.getElement1() != null) {
-            for (final Unit.Element element : kinematicPair.getElement1().getUnit().getElements()) {
+        if (kinematicPair.getUnitElement1() != null) {
+            for (final UnitElement element : kinematicPair.getUnitElement1().getUnit().getElements()) {
                 result.add(element.getKinematicPair());
             }
         }

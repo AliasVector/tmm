@@ -2,8 +2,8 @@ package com.mar.tmm.util;
 
 import java.util.UUID;
 
-import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.DefaultMechanism;
+import com.mar.tmm.model.impl.UnitElement;
 import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
 import com.mar.tmm.model.impl.kinematicpair.RotationalPair;
 import com.mar.tmm.model.impl.kinematicpair.TranslationalPair;
@@ -79,13 +79,13 @@ public final class MechanismUtils {
         result.setKinematicPair(pair);
         pair.setName(pairName);
 
-        final Unit.Element rack = KinematicUtils.createElementForUnit(result.getRackUnit(), 0, 0);
-        rack.setKinematicPair(pair);
-        pair.setElement1(rack);
+        final UnitElement rackUnitElement = KinematicUtils.createElementForUnit(result.getRackUnit(), 0, 0);
+        rackUnitElement.setKinematicPair(pair);
+        pair.setUnitElement1(rackUnitElement);
 
-        final Unit.Element lever = KinematicUtils.createElementForUnit(result.getLeverUnit(), 0, 0);
-        lever.setKinematicPair(pair);
-        pair.setElement2(lever);
+        final UnitElement leverUnitElement = KinematicUtils.createElementForUnit(result.getLeverUnit(), 0, 0);
+        leverUnitElement.setKinematicPair(pair);
+        pair.setUnitElement2(leverUnitElement);
 
         return result;
     }

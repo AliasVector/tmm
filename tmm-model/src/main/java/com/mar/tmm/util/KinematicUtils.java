@@ -2,7 +2,7 @@ package com.mar.tmm.util;
 
 import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.Disposition;
-import com.mar.tmm.model.impl.unit.DefaultElement;
+import com.mar.tmm.model.impl.UnitElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,14 +25,14 @@ public final class KinematicUtils {
      *
      * @return anonymous class {@link com.mar.tmm.model.Unit.Element} instance
      */
-    public static Unit.Element createElementForUnit(final Unit elementUnit, final double offsetX,
+    public static UnitElement createElementForUnit(final Unit elementUnit, final double offsetX,
         final double offsetY) {
 
         if (elementUnit == null) {
             throw new IllegalArgumentException("Unit cannot be null for element creation");
         }
 
-        final DefaultElement result = new DefaultElement();
+        final UnitElement result = new UnitElement();
         result.setUnit(elementUnit);
         result.setDisposition(new Disposition(offsetX, offsetY));
 

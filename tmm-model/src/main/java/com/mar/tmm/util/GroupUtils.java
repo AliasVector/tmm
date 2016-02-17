@@ -3,7 +3,7 @@ package com.mar.tmm.util;
 import java.util.Collections;
 
 import com.google.common.collect.Lists;
-import com.mar.tmm.model.Unit;
+import com.mar.tmm.model.impl.UnitElement;
 import com.mar.tmm.model.impl.group.AbstractGroup;
 import com.mar.tmm.model.impl.group.FirstTypeGroup;
 import com.mar.tmm.model.impl.group.SecondTypeGroup;
@@ -106,14 +106,14 @@ public final class GroupUtils {
         unit.setName(unitName);
         unit.setLength(DEFAULT_LEVER_LENGTH);
 
-        final Unit.Element firstUnitElement = KinematicUtils.createElementForUnit(unit, 0, 0);
+        final UnitElement firstUnitElement = KinematicUtils.createElementForUnit(unit, 0, 0);
         unit.getElements().add(firstUnitElement);
-        pair1.setElement2(firstUnitElement);
+        pair1.setUnitElement2(firstUnitElement);
         firstUnitElement.setKinematicPair(pair1);
 
-        final Unit.Element secondUnitElement = KinematicUtils.createElementForUnit(unit, unit.getLength(), 0);
+        final UnitElement secondUnitElement = KinematicUtils.createElementForUnit(unit, unit.getLength(), 0);
         unit.getElements().add(secondUnitElement);
-        pair2.setElement1(secondUnitElement);
+        pair2.setUnitElement1(secondUnitElement);
         secondUnitElement.setKinematicPair(pair2);
     }
 }

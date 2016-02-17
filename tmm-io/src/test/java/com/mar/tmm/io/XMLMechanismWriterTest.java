@@ -16,6 +16,7 @@ import com.mar.tmm.model.Group;
 import com.mar.tmm.model.Mechanism;
 import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.DefaultMechanism;
+import com.mar.tmm.model.impl.UnitElement;
 import com.mar.tmm.model.impl.group.FirstTypeGroup;
 import com.mar.tmm.model.impl.unit.RackUnit;
 import com.mar.tmm.util.GroupUtils;
@@ -46,8 +47,8 @@ public class XMLMechanismWriterTest {
 
         final RackUnit rackUnit = new RackUnit();
         rackUnit.setName("Last Rack");
-        final Unit.Element rackElement = KinematicUtils.createElementForUnit(rackUnit, 0, 0);
-        group.getExternalKinematicPairs().get(1).setElement2(rackElement);
+        final UnitElement rackElement = KinematicUtils.createElementForUnit(rackUnit, 0, 0);
+        group.getExternalKinematicPairs().get(1).setUnitElement2(rackElement);
         rackElement.setKinematicPair(group.getExternalKinematicPairs().get(1));
 
         return testMechanism;
@@ -121,18 +122,18 @@ public class XMLMechanismWriterTest {
         assertEquals("Reference unit elements and test unit elements sizes are not the same",
             CollectionUtils.size(referenceUnit.getElements()), CollectionUtils.size(testUnit.getElements()));
 
-        for (final Unit.Element referenceElement : referenceUnit.getElements()) {
+        for (final UnitElement referenceElement : referenceUnit.getElements()) {
             assertTrue("Reference unit contains element which is not in test unit",
                 testUnit.getElements().contains(referenceElement));
 
             final int index = testUnit.getElements().indexOf(referenceElement);
-            final Unit.Element testElement = testUnit.getElements().get(index);
+            final UnitElement testElement = testUnit.getElements().get(index);
 
             compareElements(referenceElement, testElement);
         }
     }
 
-    private void compareElements(final Unit.Element referenceElement, final Unit.Element testElement) {
+    private void compareElements(final UnitElement referenceElement, final UnitElement testElement) {
         assertNotNull("Reference unit element cannot be null", referenceElement);
         assertNotNull("Test unit element cannot be null", testElement);
 
