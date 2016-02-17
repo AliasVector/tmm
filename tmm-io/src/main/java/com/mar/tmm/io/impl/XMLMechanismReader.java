@@ -7,6 +7,14 @@ import javax.xml.bind.Unmarshaller;
 import com.mar.tmm.io.MechanismReader;
 import com.mar.tmm.io.exception.TmmIOException;
 import com.mar.tmm.model.Mechanism;
+import com.mar.tmm.model.impl.group.FirstTypeGroup;
+import com.mar.tmm.model.impl.group.SecondTypeGroup;
+import com.mar.tmm.model.impl.kinematicpair.RotationalPair;
+import com.mar.tmm.model.impl.kinematicpair.TranslationalPair;
+import com.mar.tmm.model.impl.unit.DefaultElement;
+import com.mar.tmm.model.impl.unit.LeverUnit;
+import com.mar.tmm.model.impl.unit.RackUnit;
+import com.mar.tmm.model.impl.unit.SlideUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +46,9 @@ public class XMLMechanismReader implements MechanismReader {
         try {
             final File sourceFile = new File(source);
 
-            final JAXBContext context = JAXBContext.newInstance(targetType);
+            final JAXBContext context = JAXBContext.newInstance(targetType, DefaultElement.class,
+                RotationalPair.class, TranslationalPair.class, FirstTypeGroup.class, SecondTypeGroup.class,
+                RackUnit.class, LeverUnit.class, SlideUnit.class);
             final Unmarshaller unmarshaller = context.createUnmarshaller();
             final T result = (T) unmarshaller.unmarshal(sourceFile);
 

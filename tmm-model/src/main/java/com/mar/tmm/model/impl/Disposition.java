@@ -50,4 +50,26 @@ public class Disposition {
             .append("offsetY", offsetY)
             .toString();
     }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Disposition that = (Disposition) o;
+
+        if (Double.compare(that.offsetX, offsetX) != 0) return false;
+        return Double.compare(that.offsetY, offsetY) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(offsetX);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(offsetY);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }
