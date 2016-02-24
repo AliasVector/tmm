@@ -1,9 +1,5 @@
 package com.mar.tmm.model.impl.kinematicpair;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.impl.Disposition;
@@ -12,6 +8,13 @@ import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
+
 /**
  * Describes some abstract kinematic pair with common implementation.
  */
@@ -19,6 +22,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public abstract class AbstractKinematicPair implements KinematicPair {
 
     @XmlAttribute(name = "id")
+    @XmlID
     private String id = MechanismUtils.generateId();
 
     @XmlAttribute
@@ -27,10 +31,10 @@ public abstract class AbstractKinematicPair implements KinematicPair {
     @XmlElement
     private Disposition disposition = new Disposition();
 
-    @XmlElement(name = "Element1")
+    @XmlIDREF
     private UnitElement unitElement1;
 
-    @XmlElement(name = "Element2")
+    @XmlIDREF
     private UnitElement unitElement2;
 
     public AbstractKinematicPair() {
@@ -101,7 +105,7 @@ public abstract class AbstractKinematicPair implements KinematicPair {
      */
     @Override
     public void setUnitElement2(final UnitElement unitElement2) {
-        this.unitElement2= unitElement2;
+        this.unitElement2 = unitElement2;
     }
 
     /**
@@ -110,11 +114,11 @@ public abstract class AbstractKinematicPair implements KinematicPair {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
-            .append("id", id)
-            .append("name", name)
-            .append("disposition", disposition)
-            .append("unitElement1", unitElement1)
-            .append("unitElement2", unitElement2)
-            .toString();
+                .append("id", id)
+                .append("name", name)
+                .append("disposition", disposition)
+                .append("unitElement1", unitElement1)
+                .append("unitElement2", unitElement2)
+                .toString();
     }
 }

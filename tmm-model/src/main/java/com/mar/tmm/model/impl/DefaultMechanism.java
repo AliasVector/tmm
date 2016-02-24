@@ -7,14 +7,20 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.common.collect.Lists;
 import com.mar.tmm.model.Group;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Mechanism;
+import com.mar.tmm.model.impl.group.FirstTypeGroup;
+import com.mar.tmm.model.impl.group.SecondTypeGroup;
 import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
+import com.mar.tmm.model.impl.kinematicpair.RotationalPair;
+import com.mar.tmm.model.impl.kinematicpair.TranslationalPair;
 import com.mar.tmm.model.impl.unit.LeverUnit;
 import com.mar.tmm.model.impl.unit.RackUnit;
 import com.mar.tmm.util.KinematicUtils;
@@ -42,7 +48,7 @@ public class DefaultMechanism implements Mechanism {
     @XmlElement(name = "LeverUnit")
     private LeverUnit leverUnit;
 
-    @XmlElement
+    @XmlAnyElement
     private AbstractKinematicPair kinematicPair;
 
     @XmlAnyElement
@@ -97,7 +103,7 @@ public class DefaultMechanism implements Mechanism {
 
         if (leverUnit == null) {
             throw new IllegalStateException("Cannot connect kinematic pair to mechanism. Lever unit "
-                + "was not initialized");
+                    + "was not initialized");
         }
 
         final UnitElement unitElement = KinematicUtils.createElementForUnit(leverUnit, leverUnit.getLength(), 0);
@@ -150,13 +156,13 @@ public class DefaultMechanism implements Mechanism {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
-            .append("id", id)
-            .append("name", name)
-            .append("rackUnit", rackUnit)
-            .append("leverUnit", leverUnit)
-            .append("kinematicPair", kinematicPair)
-            .append("groups", groups)
-            .toString();
+                .append("id", id)
+                .append("name", name)
+                .append("rackUnit", rackUnit)
+                .append("leverUnit", leverUnit)
+                .append("kinematicPair", kinematicPair)
+                .append("groups", groups)
+                .toString();
     }
 
     @Override

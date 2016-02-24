@@ -1,19 +1,25 @@
 package com.mar.tmm.model.impl.unit;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlID;
 
 import com.google.common.collect.Lists;
 import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.UnitElement;
+import com.mar.tmm.model.impl.kinematicpair.RotationalPair;
+import com.mar.tmm.model.impl.kinematicpair.TranslationalPair;
 import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 
 /**
  * Describes some abstract unit with common implementation.
@@ -28,7 +34,7 @@ public abstract class AbstractUnit implements Unit {
     @XmlAttribute(name = "name")
     private String name;
 
-    @XmlAnyElement
+    @XmlElement
     @XmlElementWrapper(name = "elements")
     private List<UnitElement> elements = Lists.newArrayList();
 

@@ -2,10 +2,6 @@ package com.mar.tmm.model.impl.group;
 
 import java.util.List;
 import java.util.Set;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlAttribute;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -13,9 +9,21 @@ import com.mar.tmm.model.Group;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.UnitElement;
+import com.mar.tmm.model.impl.kinematicpair.RotationalPair;
+import com.mar.tmm.model.impl.kinematicpair.TranslationalPair;
 import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 
 /**
  * Abstract group functionality.
@@ -26,12 +34,14 @@ public abstract class AbstractGroup implements Group {
     private static final int P5_RATE = 2;
 
     @XmlAttribute(name = "id")
+    @XmlID
     private String id = MechanismUtils.generateId();
 
     @XmlAttribute
     private String name;
 
     @XmlAnyElement
+    @XmlElementWrapper(name = "ExternalPairs")
     private List<KinematicPair> kinematicPairs = Lists.newArrayList();
 
     /**
@@ -84,7 +94,7 @@ public abstract class AbstractGroup implements Group {
     }
 
     private void collectItemsForKinematicPair(final Set<Unit> units, final Set<KinematicPair> p4Pairs,
-        final Set<KinematicPair> p5Pairs, final KinematicPair pair) {
+                                              final Set<KinematicPair> p5Pairs, final KinematicPair pair) {
 
         if (pair != null && !p4Pairs.contains(pair) && !p5Pairs.contains(pair)) {
             if (KinematicPair.KinematicClass.P4 == pair.getKinematicClass()) {
@@ -122,9 +132,9 @@ public abstract class AbstractGroup implements Group {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
-            .append("id", id)
-            .append("name", name)
-            .append("kinematicPairs", kinematicPairs)
-            .toString();
+                .append("id", id)
+                .append("name", name)
+                .append("kinematicPairs", kinematicPairs)
+                .toString();
     }
 }
