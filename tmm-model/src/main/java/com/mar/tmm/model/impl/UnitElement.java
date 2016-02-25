@@ -1,24 +1,25 @@
 package com.mar.tmm.model.impl;
 
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 import com.mar.tmm.model.EntityWithId;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Unit;
-import com.mar.tmm.model.impl.Disposition;
+import com.mar.tmm.model.impl.kinematicpair.RotationalPair;
+import com.mar.tmm.model.impl.kinematicpair.TranslationalPair;
 import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * Implementation of {@link com.mar.tmm.model.Unit.Element} interace.
+ * Class for specifying unit elements.
  */
 @XmlRootElement(name = "DefaultElement")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -28,22 +29,15 @@ public class UnitElement implements EntityWithId {
     @XmlID
     private String id = MechanismUtils.generateId();
 
-    @XmlTransient
+    @XmlIDREF
     private Unit unit;
 
     @XmlElement(name = "disposition")
     private Disposition disposition;
 
-    @XmlTransient
+    @XmlIDREF
+    @XmlElements({@XmlElement(type = RotationalPair.class), @XmlElement(type = TranslationalPair.class)})
     private KinematicPair kinematicPair;
-
-    public void afterUnmarshal(final Unmarshaller unmarshaller, final Object parent) {
-        if (parent instanceof Unit) {
-            this.unit = (Unit) parent;
-        } else if (parent instanceof KinematicPair) {
-            this.kinematicPair = (KinematicPair) parent;
-        }
-    }
 
     /**
      * {@inheritDoc}

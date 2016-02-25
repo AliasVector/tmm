@@ -4,6 +4,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.impl.Disposition;
@@ -19,6 +21,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public abstract class AbstractKinematicPair implements KinematicPair {
 
     @XmlAttribute(name = "id")
+    @XmlID
     private String id = MechanismUtils.generateId();
 
     @XmlAttribute
@@ -27,10 +30,10 @@ public abstract class AbstractKinematicPair implements KinematicPair {
     @XmlElement
     private Disposition disposition = new Disposition();
 
-    @XmlElement(name = "Element1")
+    @XmlIDREF
     private UnitElement unitElement1;
 
-    @XmlElement(name = "Element2")
+    @XmlIDREF
     private UnitElement unitElement2;
 
     public AbstractKinematicPair() {

@@ -18,7 +18,6 @@ import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.DefaultMechanism;
 import com.mar.tmm.model.impl.UnitElement;
 import com.mar.tmm.model.impl.group.FirstTypeGroup;
-import com.mar.tmm.model.impl.unit.RackUnit;
 import com.mar.tmm.util.GroupUtils;
 import com.mar.tmm.util.KinematicUtils;
 import com.mar.tmm.util.MechanismUtils;
@@ -45,8 +44,9 @@ public class XMLMechanismWriterTest {
 
         testMechanism.connectGroupToMechanism(group, group.getExternalPair1());
 
-        final RackUnit rackUnit = new RackUnit();
+        final Unit rackUnit = new Unit();
         rackUnit.setName("Last Rack");
+        rackUnit.setFixed(true);
         final UnitElement rackElement = KinematicUtils.createElementForUnit(rackUnit, 0, 0);
         group.getExternalPair2().setUnitElement2(rackElement);
         rackElement.setKinematicPair(group.getExternalPair2());

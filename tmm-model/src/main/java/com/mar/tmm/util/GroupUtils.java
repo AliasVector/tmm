@@ -1,5 +1,6 @@
 package com.mar.tmm.util;
 
+import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.UnitElement;
 import com.mar.tmm.model.impl.group.AbstractGroup;
 import com.mar.tmm.model.impl.group.FifthTypeGroup;
@@ -10,7 +11,6 @@ import com.mar.tmm.model.impl.group.ThirdTypeGroup;
 import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
 import com.mar.tmm.model.impl.kinematicpair.RotationalPair;
 import com.mar.tmm.model.impl.kinematicpair.TranslationalPair;
-import com.mar.tmm.model.impl.unit.LeverUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +19,6 @@ import org.slf4j.LoggerFactory;
  * Helper class for tmm groups.
  */
 public final class GroupUtils {
-    public static final int DEFAULT_LEVER_LENGTH = 20;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupUtils.class);
 
     private GroupUtils() {
@@ -50,7 +48,7 @@ public final class GroupUtils {
 
         final FirstTypeGroup result = fillThreePairsGroup(new FirstTypeGroup(name),
             new RotationalPair(externalPair1Name), new RotationalPair(externalPair2Name),
-            new RotationalPair(internalPairName), leverUnit1Name, leverUnit2Name);
+            new RotationalPair(internalPairName), createUnit(leverUnit1Name), createUnit(leverUnit2Name));
 
         LOGGER.debug("Finished creating the structure group of the first type: {}", result);
         return result;
@@ -80,7 +78,7 @@ public final class GroupUtils {
 
         final SecondTypeGroup result = fillThreePairsGroup(new SecondTypeGroup(name),
             new RotationalPair(externalPair1Name), new TranslationalPair(externalPair2Name),
-            new RotationalPair(internalPairName), leverUnit1Name, leverUnit2Name);
+            new RotationalPair(internalPairName), createUnit(leverUnit1Name), createUnit(leverUnit2Name));
 
         LOGGER.debug("Finished creating the structure group of the second type: {}", result);
         return result;
@@ -110,7 +108,7 @@ public final class GroupUtils {
 
         final ThirdTypeGroup result = fillThreePairsGroup(new ThirdTypeGroup(name),
             new RotationalPair(externalPair1Name), new RotationalPair(externalPair2Name),
-            new TranslationalPair(internalPairName), leverUnit1Name, leverUnit2Name);
+            new TranslationalPair(internalPairName), createUnit(leverUnit1Name), createUnit(leverUnit2Name));
 
         LOGGER.debug("Finished creating the structure group of the third type: {}", result);
         return result;
@@ -140,7 +138,7 @@ public final class GroupUtils {
 
         final FourthTypeGroup result = fillThreePairsGroup(new FourthTypeGroup(name),
             new TranslationalPair(externalPair1Name), new RotationalPair(externalPair2Name),
-            new TranslationalPair(internalPairName), leverUnit1Name, leverUnit2Name);
+            new TranslationalPair(internalPairName), createUnit(leverUnit1Name), createUnit(leverUnit2Name));
 
         LOGGER.debug("Finished creating the structure group of the fourth type: {}", result);
         return result;
@@ -170,7 +168,7 @@ public final class GroupUtils {
 
         final FifthTypeGroup result = fillThreePairsGroup(new FifthTypeGroup(name),
             new RotationalPair(externalPair1Name), new TranslationalPair(externalPair2Name),
-            new TranslationalPair(internalPairName), leverUnit1Name, leverUnit2Name);
+            new TranslationalPair(internalPairName), createUnit(leverUnit1Name), createUnit(leverUnit2Name));
 
         LOGGER.debug("Finished creating the structure group of the fourth type: {}", result);
         return result;
@@ -178,28 +176,24 @@ public final class GroupUtils {
 
     private static <T extends AbstractGroup> T fillThreePairsGroup(final T group,
         final AbstractKinematicPair firstExternalPair, final AbstractKinematicPair secondExternalPair,
-        final AbstractKinematicPair internalPair, final String leverUnit1Name, final String leverUnit2Name) {
+        final AbstractKinematicPair internalPair, final Unit unit1, final Unit unit2) {
 
         group.setExternalPair1(firstExternalPair);
         group.setExternalPair2(secondExternalPair);
 
         group.setInternalPair(internalPair);
 
-        final LeverUnit unit1 = createAndConnectLeverUnit(leverUnit1Name, firstExternalPair, internalPair);
-        group.setLeverUnit1(unit1);
+        group.setUnit1(unit1);
+        group.setUnit2(unit2);
 
-        final LeverUnit unit2 = createAndConnectLeverUnit(leverUnit2Name, internalPair, secondExternalPair);
-        group.setLeverUnit2(unit2);
+        connectUnit(unit1, firstExternalPair, internalPair);
+        connectUnit(unit2, internalPair, secondExternalPair);
 
         return group;
     }
 
-    private static LeverUnit createAndConnectLeverUnit(final String unitName, final AbstractKinematicPair pair1,
+    private static void connectUnit(final Unit unit, final AbstractKinematicPair pair1,
         final AbstractKinematicPair pair2) {
-
-        final LeverUnit unit = new LeverUnit();
-        unit.setName(unitName);
-        unit.setLength(DEFAULT_LEVER_LENGTH);
 
         final UnitElement firstUnitElement = KinematicUtils.createElementForUnit(unit, 0, 0);
         unit.getElements().add(firstUnitElement);
@@ -210,7 +204,11 @@ public final class GroupUtils {
         unit.getElements().add(secondUnitElement);
         pair2.setUnitElement1(secondUnitElement);
         secondUnitElement.setKinematicPair(pair2);
+    }
 
+    private static Unit createUnit(final String unitName) {
+        final Unit unit = new Unit();
+        unit.setName(unitName);
         return unit;
     }
 }

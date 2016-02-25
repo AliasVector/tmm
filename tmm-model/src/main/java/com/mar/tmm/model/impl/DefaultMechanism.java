@@ -14,9 +14,8 @@ import com.google.common.collect.Lists;
 import com.mar.tmm.model.Group;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Mechanism;
+import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
-import com.mar.tmm.model.impl.unit.LeverUnit;
-import com.mar.tmm.model.impl.unit.RackUnit;
 import com.mar.tmm.util.KinematicUtils;
 import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -37,10 +36,10 @@ public class DefaultMechanism implements Mechanism {
     private String name;
 
     @XmlElement(name = "Rack")
-    private RackUnit rackUnit;
+    private Unit rackUnit;
 
     @XmlElement(name = "LeverUnit")
-    private LeverUnit leverUnit;
+    private Unit leverUnit;
 
     @XmlElement
     private AbstractKinematicPair kinematicPair;
@@ -50,8 +49,10 @@ public class DefaultMechanism implements Mechanism {
     private List<Group> groups = Lists.newArrayList();
 
     public DefaultMechanism() {
-        rackUnit = new RackUnit();
-        leverUnit = new LeverUnit();
+        rackUnit = new Unit();
+        rackUnit.setFixed(true);
+
+        leverUnit = new Unit();
     }
 
     /**
@@ -70,7 +71,7 @@ public class DefaultMechanism implements Mechanism {
      * {@inheritDoc}
      */
     @Override
-    public RackUnit getRackUnit() {
+    public Unit getRackUnit() {
         return rackUnit;
     }
 
@@ -78,7 +79,7 @@ public class DefaultMechanism implements Mechanism {
      * {@inheritDoc}
      */
     @Override
-    public LeverUnit getLeverUnit() {
+    public Unit getLeverUnit() {
         return leverUnit;
     }
 

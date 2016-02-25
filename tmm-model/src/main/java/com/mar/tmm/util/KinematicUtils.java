@@ -17,14 +17,14 @@ public final class KinematicUtils {
     }
 
     /**
-     * Creates {@link com.mar.tmm.model.Unit.Element} instance and initializes it with {@link Disposition} object.
+     * Creates {@link com.mar.tmm.model.impl.UnitElement} instance and initializes it with {@link Disposition} object.
      * Also add this newly created element to the given unit.
      *
      * @param elementUnit unit to be used as element owner
      * @param offsetX     offset for x for disposition object
      * @param offsetY     offset for y for disposition object
      *
-     * @return anonymous class {@link com.mar.tmm.model.Unit.Element} instance
+     * @return anonymous class {@link com.mar.tmm.model.impl.UnitElement} instance
      */
     public static UnitElement createElementForUnit(final Unit elementUnit, final double offsetX,
         final double offsetY) {

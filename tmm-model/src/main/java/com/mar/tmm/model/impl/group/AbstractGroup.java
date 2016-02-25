@@ -4,11 +4,12 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
 
 import com.mar.tmm.model.Group;
 import com.mar.tmm.model.KinematicPair;
+import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
-import com.mar.tmm.model.impl.unit.LeverUnit;
 import com.mar.tmm.util.KinematicUtils;
 import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -23,16 +24,17 @@ public abstract class AbstractGroup implements Group {
     private static final int P5_RATE = 2;
 
     @XmlAttribute(name = "id")
+    @XmlID
     private String id = MechanismUtils.generateId();
 
     @XmlAttribute
     private String name;
 
-    @XmlElement(name = "LeverUnit1")
-    private LeverUnit leverUnit1;
+    @XmlElement(name = "Unit1")
+    private Unit unit1;
 
-    @XmlElement(name = "LeverUnit1")
-    private LeverUnit leverUnit2;
+    @XmlElement(name = "Unit2")
+    private Unit unit2;
 
     @XmlElement(name = "InternalPair")
     private AbstractKinematicPair internalPair;
@@ -64,20 +66,20 @@ public abstract class AbstractGroup implements Group {
         this.name = name;
     }
 
-    public LeverUnit getLeverUnit1() {
-        return leverUnit1;
+    public Unit getUnit1() {
+        return unit1;
     }
 
-    public void setLeverUnit1(final LeverUnit leverUnit1) {
-        this.leverUnit1 = leverUnit1;
+    public void setUnit1(final Unit unit1) {
+        this.unit1 = unit1;
     }
 
-    public LeverUnit getLeverUnit2() {
-        return leverUnit2;
+    public Unit getUnit2() {
+        return unit2;
     }
 
-    public void setLeverUnit2(final LeverUnit leverUnit2) {
-        this.leverUnit2 = leverUnit2;
+    public void setUnit2(final Unit unit2) {
+        this.unit2 = unit2;
     }
 
     public AbstractKinematicPair getInternalPair() {
@@ -123,8 +125,8 @@ public abstract class AbstractGroup implements Group {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
             .append("id", id)
             .append("name", name)
-            .append("leverUnit1", leverUnit1)
-            .append("leverUnit2", leverUnit2)
+            .append("unit1", unit1)
+            .append("unit2", unit2)
             .append("internalPair", internalPair)
             .append("externalPair1", externalPair1)
             .append("externalPair2", externalPair2)
