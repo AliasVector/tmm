@@ -1,7 +1,5 @@
 package com.mar.tmm.model;
 
-import java.util.List;
-
 /**
  * Interface to describe the common behavior for mechanism group.
  */
@@ -20,13 +18,6 @@ public interface Group extends EntityWithId {
      * @return string with the name
      */
     String getName();
-
-    /**
-     * Returns the list of external kinematic pairs of this group.
-     *
-     * @return list of external kinematic pairs
-     */
-    List<KinematicPair> getExternalKinematicPairs();
 
     /**
      * Calculates the freedom degrees of this group. Evaluates the amount of kinematic pairs of the group and the amount
