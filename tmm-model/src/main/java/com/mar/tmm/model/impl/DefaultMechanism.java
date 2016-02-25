@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.common.collect.Lists;
@@ -43,16 +44,16 @@ public class DefaultMechanism implements Mechanism {
     @XmlAttribute(name = "name")
     private String name;
 
+    @XmlElements({
+            @XmlElement(name="RotationalPair", type = RotationalPair.class),
+            @XmlElement(name="TranslationalPair", type = TranslationalPair.class)})
+    private AbstractKinematicPair kinematicPair;
+
     @XmlElement(name = "Rack")
     private Unit rackUnit;
 
     @XmlElement(name = "LeverUnit")
     private Unit leverUnit;
-
-    @XmlElements({
-            @XmlElement(name="RotationalPair", type = RotationalPair.class),
-            @XmlElement(name="TranslationalPair", type = TranslationalPair.class)})
-    private AbstractKinematicPair kinematicPair;
 
     @XmlElementWrapper(name = "Groups")
     @XmlElements({
@@ -102,7 +103,7 @@ public class DefaultMechanism implements Mechanism {
      * {@inheritDoc}
      */
     @Override
-    public void connectGroupToMechanism(final Group group, final KinematicPair groupPair) {
+    public void connectGroupToMechanism(final Group group, final AbstractKinematicPair groupPair) {
         if (groupPair == null) {
             throw new IllegalArgumentException("Cannot connect null kinematic pair to mechanism");
         }

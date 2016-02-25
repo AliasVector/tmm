@@ -1,5 +1,7 @@
 package com.mar.tmm.model;
 
+import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
+
 import java.util.List;
 
 /**
@@ -47,5 +49,5 @@ public interface Mechanism extends EntityWithId {
      * @param groupPair external kinematic pair of the group to be connected to mechanism. Free element of the
      *                  group's kinematic pair is used to connect mechanism's lever.
      */
-    void connectGroupToMechanism(Group group, KinematicPair groupPair);
+    void connectGroupToMechanism(Group group, AbstractKinematicPair groupPair);
 }

@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 
 import com.mar.tmm.model.Group;
 import com.mar.tmm.model.KinematicPair;
@@ -30,12 +31,6 @@ public abstract class AbstractGroup implements Group {
     @XmlAttribute
     private String name;
 
-    @XmlElement(name = "Unit1")
-    private Unit unit1;
-
-    @XmlElement(name = "Unit2")
-    private Unit unit2;
-
     @XmlElement(name = "InternalPair")
     private AbstractKinematicPair internalPair;
 
@@ -44,6 +39,12 @@ public abstract class AbstractGroup implements Group {
 
     @XmlElement(name = "ExternalPair2")
     private AbstractKinematicPair externalPair2;
+
+    @XmlElement(name = "Unit1")
+    private Unit unit1;
+
+    @XmlElement(name = "Unit2")
+    private Unit unit2;
 
     /**
      * {@inheritDoc}

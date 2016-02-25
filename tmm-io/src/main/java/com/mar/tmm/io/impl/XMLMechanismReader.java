@@ -44,9 +44,7 @@ public class XMLMechanismReader implements MechanismReader {
         try {
             final File sourceFile = new File(source);
 
-            final JAXBContext context = JAXBContext.newInstance(targetType, UnitElement.class,
-                RotationalPair.class, TranslationalPair.class, FirstTypeGroup.class, SecondTypeGroup.class,
-                Unit.class);
+            final JAXBContext context = JAXBContext.newInstance(targetType);
             final Unmarshaller unmarshaller = context.createUnmarshaller();
             final T result = (T) unmarshaller.unmarshal(sourceFile);
 

@@ -12,7 +12,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * Class of the group of the first type. This group contains two external rotational pair and one internal rotational
  * pair. These pairs are connected with levers.
  */
-@XmlRootElement(name = "FirstTypeGroup")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FirstTypeGroup extends AbstractGroup {
     private static final GroupType TYPE = GroupType.FIRST;

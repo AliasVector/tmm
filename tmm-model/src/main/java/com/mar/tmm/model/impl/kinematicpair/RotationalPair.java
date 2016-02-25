@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Describes rotational kinematic pair.
  */
-@XmlRootElement(name = "RotationalPair")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RotationalPair extends AbstractKinematicPair {
 

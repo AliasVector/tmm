@@ -31,9 +31,11 @@ public abstract class AbstractKinematicPair implements KinematicPair {
     private Disposition disposition = new Disposition();
 
     @XmlIDREF
+    @XmlElement(name = "Element1")
     private UnitElement unitElement1;
 
     @XmlIDREF
+    @XmlElement(name = "Element2")
     private UnitElement unitElement2;
 
     public AbstractKinematicPair() {

@@ -44,9 +44,7 @@ public class XMLMechanismWriter implements MechanismWriter {
         try {
             final File targetFile = new File(destination);
 
-            final JAXBContext context = JAXBContext.newInstance(mechanism.getClass(), UnitElement.class,
-                RotationalPair.class, TranslationalPair.class, FirstTypeGroup.class, SecondTypeGroup.class,
-                Unit.class);
+            final JAXBContext context = JAXBContext.newInstance(mechanism.getClass());
             final Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, prettyView);
             marshaller.marshal(mechanism, targetFile);

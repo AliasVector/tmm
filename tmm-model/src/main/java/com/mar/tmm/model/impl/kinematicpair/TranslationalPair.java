@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Describes translational kinematic pair.
  */
-@XmlRootElement(name = "TranslationalPair")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class TranslationalPair extends AbstractKinematicPair {
 

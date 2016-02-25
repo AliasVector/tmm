@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.mar.tmm.model.EntityWithId;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Unit;
+import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
 import com.mar.tmm.model.impl.kinematicpair.RotationalPair;
 import com.mar.tmm.model.impl.kinematicpair.TranslationalPair;
 import com.mar.tmm.util.MechanismUtils;
@@ -21,7 +22,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * Class for specifying unit elements.
  */
-@XmlRootElement(name = "Element")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class UnitElement implements EntityWithId {
 
@@ -32,7 +32,7 @@ public class UnitElement implements EntityWithId {
     @XmlIDREF
     private Unit unit;
 
-    @XmlElement(name = "disposition")
+    @XmlElement(name = "Disposition")
     private Disposition disposition;
 
     @XmlIDREF
