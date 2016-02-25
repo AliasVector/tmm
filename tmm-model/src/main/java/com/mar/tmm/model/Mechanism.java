@@ -2,9 +2,6 @@ package com.mar.tmm.model;
 
 import java.util.List;
 
-import com.mar.tmm.model.impl.unit.LeverUnit;
-import com.mar.tmm.model.impl.unit.RackUnit;
-
 /**
  * Interface to describe the common behavior for all kind of mechanisms.
  */
@@ -26,16 +23,16 @@ public interface Mechanism extends EntityWithId {
     /**
      * Returns rack unit of this mechanism.
      *
-     * @return {@link RackUnit} instance
+     * @return {@link Unit} instance
      */
-    RackUnit getRackUnit();
+    Unit getRackUnit();
 
     /**
      * Returns lever unit of this mechanism.
      *
-     * @return {@link LeverUnit} instance
+     * @return {@link Unit} instance
      */
-    LeverUnit getLeverUnit();
+    Unit getLeverUnit();
 
     /**
      * Returns kinematic pair of the mechanism.

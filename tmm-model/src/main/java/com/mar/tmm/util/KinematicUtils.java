@@ -1,5 +1,6 @@
 package com.mar.tmm.util;
 
+import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.Disposition;
 import com.mar.tmm.model.impl.UnitElement;
@@ -16,14 +17,14 @@ public final class KinematicUtils {
     }
 
     /**
-     * Creates {@link com.mar.tmm.model.Unit.Element} instance and initializes it with {@link Disposition} object.
+     * Creates {@link com.mar.tmm.model.impl.UnitElement} instance and initializes it with {@link Disposition} object.
      * Also add this newly created element to the given unit.
      *
      * @param elementUnit unit to be used as element owner
      * @param offsetX     offset for x for disposition object
      * @param offsetY     offset for y for disposition object
      *
-     * @return anonymous class {@link com.mar.tmm.model.Unit.Element} instance
+     * @return anonymous class {@link com.mar.tmm.model.impl.UnitElement} instance
      */
     public static UnitElement createElementForUnit(final Unit elementUnit, final double offsetX,
         final double offsetY) {
@@ -38,6 +39,30 @@ public final class KinematicUtils {
 
         elementUnit.getElements().add(result);
         return result;
+    }
+
+    /**
+     * Calculates the amount of pairs of the given class between the given pairs.
+     *
+     * @param kinematicClass class of groups to be calculated
+     * @param kinematicPairs pairs to be tested
+     *
+     * @return int value of amount of pairs with the given class
+     */
+    public static int calculateKinematicPairsOfClass(final KinematicPair.KinematicClass kinematicClass,
+        final KinematicPair... kinematicPairs) {
+
+        if (kinematicPairs != null) {
+            int result = 0;
+            for (final KinematicPair pair : kinematicPairs) {
+                if (pair != null && pair.getKinematicClass() == kinematicClass) {
+                    result++;
+                }
+            }
+            return result;
+        }
+
+        return 0;
     }
 
 }

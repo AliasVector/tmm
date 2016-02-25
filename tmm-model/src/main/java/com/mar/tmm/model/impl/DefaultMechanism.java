@@ -9,20 +9,21 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.common.collect.Lists;
 import com.mar.tmm.model.Group;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Mechanism;
+import com.mar.tmm.model.Unit;
+import com.mar.tmm.model.impl.group.FifthTypeGroup;
 import com.mar.tmm.model.impl.group.FirstTypeGroup;
+import com.mar.tmm.model.impl.group.FourthTypeGroup;
 import com.mar.tmm.model.impl.group.SecondTypeGroup;
+import com.mar.tmm.model.impl.group.ThirdTypeGroup;
 import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
 import com.mar.tmm.model.impl.kinematicpair.RotationalPair;
 import com.mar.tmm.model.impl.kinematicpair.TranslationalPair;
-import com.mar.tmm.model.impl.unit.LeverUnit;
-import com.mar.tmm.model.impl.unit.RackUnit;
 import com.mar.tmm.util.KinematicUtils;
 import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -43,21 +44,30 @@ public class DefaultMechanism implements Mechanism {
     private String name;
 
     @XmlElement(name = "Rack")
-    private RackUnit rackUnit;
+    private Unit rackUnit;
 
     @XmlElement(name = "LeverUnit")
-    private LeverUnit leverUnit;
+    private Unit leverUnit;
 
-    @XmlAnyElement
+    @XmlElements({
+            @XmlElement(name="RotationalPair", type = RotationalPair.class),
+            @XmlElement(name="TranslationalPair", type = TranslationalPair.class)})
     private AbstractKinematicPair kinematicPair;
 
-    @XmlAnyElement
     @XmlElementWrapper(name = "Groups")
+    @XmlElements({
+            @XmlElement(name="FirstTypeGroup", type = FirstTypeGroup.class),
+            @XmlElement(name="SecondTypeGroup", type = SecondTypeGroup.class),
+            @XmlElement(name="ThirdTypeGroup", type = ThirdTypeGroup.class),
+            @XmlElement(name="FourthTypeGroup", type = FourthTypeGroup.class),
+            @XmlElement(name="FifthTypeGroup", type = FifthTypeGroup.class)})
     private List<Group> groups = Lists.newArrayList();
 
     public DefaultMechanism() {
-        rackUnit = new RackUnit();
-        leverUnit = new LeverUnit();
+        rackUnit = new Unit();
+        rackUnit.setFixed(true);
+
+        leverUnit = new Unit();
     }
 
     /**
@@ -76,7 +86,7 @@ public class DefaultMechanism implements Mechanism {
      * {@inheritDoc}
      */
     @Override
-    public RackUnit getRackUnit() {
+    public Unit getRackUnit() {
         return rackUnit;
     }
 
@@ -84,7 +94,7 @@ public class DefaultMechanism implements Mechanism {
      * {@inheritDoc}
      */
     @Override
-    public LeverUnit getLeverUnit() {
+    public Unit getLeverUnit() {
         return leverUnit;
     }
 
@@ -103,7 +113,7 @@ public class DefaultMechanism implements Mechanism {
 
         if (leverUnit == null) {
             throw new IllegalStateException("Cannot connect kinematic pair to mechanism. Lever unit "
-                    + "was not initialized");
+                + "was not initialized");
         }
 
         final UnitElement unitElement = KinematicUtils.createElementForUnit(leverUnit, leverUnit.getLength(), 0);
@@ -156,13 +166,13 @@ public class DefaultMechanism implements Mechanism {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.JSON_STYLE)
-                .append("id", id)
-                .append("name", name)
-                .append("rackUnit", rackUnit)
-                .append("leverUnit", leverUnit)
-                .append("kinematicPair", kinematicPair)
-                .append("groups", groups)
-                .toString();
+            .append("id", id)
+            .append("name", name)
+            .append("rackUnit", rackUnit)
+            .append("leverUnit", leverUnit)
+            .append("kinematicPair", kinematicPair)
+            .append("groups", groups)
+            .toString();
     }
 
     @Override

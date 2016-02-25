@@ -18,7 +18,6 @@ import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.DefaultMechanism;
 import com.mar.tmm.model.impl.UnitElement;
 import com.mar.tmm.model.impl.group.FirstTypeGroup;
-import com.mar.tmm.model.impl.unit.RackUnit;
 import com.mar.tmm.util.GroupUtils;
 import com.mar.tmm.util.KinematicUtils;
 import com.mar.tmm.util.MechanismUtils;
@@ -43,13 +42,14 @@ public class XMLMechanismWriterTest {
         final FirstTypeGroup group = GroupUtils.createFirstTypeGroup("Test group 1", "Ext pair 1", "Ext pair 2",
             "Internal pair", "Lever 1", "Lever 2");
 
-        testMechanism.connectGroupToMechanism(group, group.getExternalKinematicPairs().get(0));
+        testMechanism.connectGroupToMechanism(group, group.getExternalPair1());
 
-        final RackUnit rackUnit = new RackUnit();
+        final Unit rackUnit = new Unit();
         rackUnit.setName("Last Rack");
+        rackUnit.setFixed(true);
         final UnitElement rackElement = KinematicUtils.createElementForUnit(rackUnit, 0, 0);
-        group.getExternalKinematicPairs().get(1).setUnitElement2(rackElement);
-        rackElement.setKinematicPair(group.getExternalKinematicPairs().get(1));
+        group.getExternalPair2().setUnitElement2(rackElement);
+        rackElement.setKinematicPair(group.getExternalPair2());
 
         return testMechanism;
     }
@@ -154,10 +154,6 @@ public class XMLMechanismWriterTest {
         assertEquals("Test group and reference group are not the same", referenceGroup, testGroup);
         assertEquals("Test group type and reference group type are not the same", referenceGroup.getType(),
             testGroup.getType());
-
-        assertEquals("Reference group external pairs ane test group external pairs have different amount",
-            CollectionUtils.size(referenceGroup.getExternalKinematicPairs()),
-            CollectionUtils.size(testGroup.getExternalKinematicPairs()));
 
 //        for (final KinematicPair refExtKinematicPair : referenceGroup.getExternalKinematicPairs()) {
 //            assertTrue("Test group doesn't contains reference ext ")
