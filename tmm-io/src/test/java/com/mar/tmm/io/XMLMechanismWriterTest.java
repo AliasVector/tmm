@@ -32,7 +32,7 @@ public class XMLMechanismWriterTest {
 
     @After
     public void cleanUp() throws IOException {
-      //  removeXMLFile(TEST_XML_FILE);
+        removeXMLFile(TEST_XML_FILE);
     }
 
     private Mechanism createTestRotationMechanism() {
