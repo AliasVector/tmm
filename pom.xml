@@ -88,6 +88,11 @@
 				<artifactId>tmm-io</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.mar</groupId>
+				<artifactId>tmm-desktop</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -119,5 +124,6 @@
 		<module>tmm-model</module>
 		<module>tmm-io</module>
 		<module>tmm-common</module>
+		<module>tmm-desktop</module>
 	</modules>
 </project>
