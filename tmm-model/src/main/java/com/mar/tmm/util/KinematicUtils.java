@@ -1,7 +1,7 @@
 package com.mar.tmm.util;
 
 import com.mar.tmm.model.KinematicPair;
-import com.mar.tmm.model.Unit;
+import com.mar.tmm.model.impl.Unit;
 import com.mar.tmm.model.impl.Disposition;
 import com.mar.tmm.model.impl.UnitElement;
 import org.slf4j.Logger;

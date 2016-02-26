@@ -1,4 +1,4 @@
-package com.mar.tmm.model;
+package com.mar.tmm.model.impl;
 
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,8 +9,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlID;
 
 import com.google.common.collect.Lists;
-import com.mar.tmm.model.impl.Disposition;
-import com.mar.tmm.model.impl.UnitElement;
+import com.mar.tmm.model.EntityWithId;
 import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -100,5 +99,28 @@ public class Unit implements EntityWithId {
             .append("elements", elements)
             .append("fixed", fixed)
             .toString();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Unit unit = (Unit) o;
+
+        if (length != unit.length) return false;
+        if (fixed != unit.fixed) return false;
+        if (id != null ? !id.equals(unit.id) : unit.id != null) return false;
+        return !(name != null ? !name.equals(unit.name) : unit.name != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + length;
+        result = 31 * result + (fixed ? 1 : 0);
+        return result;
     }
 }

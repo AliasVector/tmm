@@ -1,158 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DefaultMechanism id="71f725be52494f97a253747e64c98034" name="Test mechanism">
-    <RotationalPair angle="0.0" id="5093552aef5448a99275d9f47f7df94e" name="First rotation pair">
-        <disposition offsetX="0.0" offsetY="0.0"/>
-        <Element1>dda38dcdaedc4aa38701eba26d71f0f9</Element1>
-        <Element2>80f2d8384de2420faeeddee7fc1767bc</Element2>
-        <kinematicClass>P4</kinematicClass>
+<DefaultMechanism id="f0586311ca3e441695f4f1920aa3fb8c" name="Test mechanism">
+    <RotationalPair angle="0.0" id="6377b51a499b499bba73bfa04cc1090f" name="First rotation pair">
+        <Disposition offsetX="0.0" offsetY="0.0"/>
+        <Element1>08ee060a040a45a2a21a21a1b3783675</Element1>
+        <Element2>30b9092181974386936407cb74dd3c77</Element2>
+        <KinematicClass>P4</KinematicClass>
     </RotationalPair>
-    <Rack id="407415b44e2e40afa821ca9c13adb37a" name="First rack" length="20" fixed="true">
+    <Rack id="a35cb41a206c490f8a2e23562659ab49" name="First rack" length="20" fixed="true">
         <Disposition offsetX="0.0" offsetY="0.0"/>
         <Elements>
-            <Element id="dda38dcdaedc4aa38701eba26d71f0f9">
-                <unit>407415b44e2e40afa821ca9c13adb37a</unit>
+            <Element id="08ee060a040a45a2a21a21a1b3783675">
+                <unit>a35cb41a206c490f8a2e23562659ab49</unit>
                 <Disposition offsetX="0.0" offsetY="0.0"/>
-                <RotationalPair angle="0.0" id="5093552aef5448a99275d9f47f7df94e" name="First rotation pair">
-                    <disposition offsetX="0.0" offsetY="0.0"/>
-                    <Element1>dda38dcdaedc4aa38701eba26d71f0f9</Element1>
-                    <Element2>80f2d8384de2420faeeddee7fc1767bc</Element2>
-                    <kinematicClass>P4</kinematicClass>
-                </RotationalPair>
             </Element>
         </Elements>
     </Rack>
-    <LeverUnit id="436e3ee597c94a94875a729ab8fcd5a8" name="Test lever 1" length="20" fixed="false">
+    <LeverUnit id="6c9449bd29e2412896fb5624e36b6ea6" name="Test lever 1" length="20" fixed="false">
         <Disposition offsetX="0.0" offsetY="0.0"/>
         <Elements>
-            <Element id="80f2d8384de2420faeeddee7fc1767bc">
-                <unit>436e3ee597c94a94875a729ab8fcd5a8</unit>
+            <Element id="30b9092181974386936407cb74dd3c77">
+                <unit>6c9449bd29e2412896fb5624e36b6ea6</unit>
                 <Disposition offsetX="0.0" offsetY="0.0"/>
-                <RotationalPair angle="0.0" id="5093552aef5448a99275d9f47f7df94e" name="First rotation pair">
-                    <disposition offsetX="0.0" offsetY="0.0"/>
-                    <Element1>dda38dcdaedc4aa38701eba26d71f0f9</Element1>
-                    <Element2>80f2d8384de2420faeeddee7fc1767bc</Element2>
-                    <kinematicClass>P4</kinematicClass>
-                </RotationalPair>
             </Element>
-            <Element id="a012a81ffe7b491ab6c3d1488cf7699c">
-                <unit>436e3ee597c94a94875a729ab8fcd5a8</unit>
+            <Element id="6f1d31d6a16f4dea96e9fdb06f92afaa">
+                <unit>6c9449bd29e2412896fb5624e36b6ea6</unit>
                 <Disposition offsetX="20.0" offsetY="0.0"/>
-                <RotationalPair angle="0.0" id="35fc759aa5204c5a978e2f1389a12f66" name="Ext pair 1">
-                    <disposition offsetX="0.0" offsetY="0.0"/>
-                    <Element1>a012a81ffe7b491ab6c3d1488cf7699c</Element1>
-                    <Element2>31920e7ea3ae445c919e90d401f619b1</Element2>
-                    <kinematicClass>P4</kinematicClass>
-                </RotationalPair>
             </Element>
         </Elements>
     </LeverUnit>
     <Groups>
-        <FirstTypeGroup id="0a0a50b653594ad9aa25adeb6836366b" name="Test group 1">
-            <InternalPair xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="rotationalPair" angle="0.0" id="6fbd9bc11cef42b4b8039c68742e0490" name="Internal pair">
-                <disposition offsetX="0.0" offsetY="0.0"/>
-                <Element1>7798e2a495e84dea92d9c765d9b602ca</Element1>
-                <Element2>3db3879cbf5e4461abd1ec497f4748fc</Element2>
-                <kinematicClass>P4</kinematicClass>
-            </InternalPair>
-            <ExternalPair1 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="rotationalPair" angle="0.0" id="35fc759aa5204c5a978e2f1389a12f66" name="Ext pair 1">
-                <disposition offsetX="0.0" offsetY="0.0"/>
-                <Element1>a012a81ffe7b491ab6c3d1488cf7699c</Element1>
-                <Element2>31920e7ea3ae445c919e90d401f619b1</Element2>
-                <kinematicClass>P4</kinematicClass>
-            </ExternalPair1>
-            <ExternalPair2 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="rotationalPair" angle="0.0" id="f1d17f79ffa241d68d38749309ada81f" name="Ext pair 2">
-                <disposition offsetX="0.0" offsetY="0.0"/>
-                <Element1>9cb73693ef2b4694be61a3b4b1d35efb</Element1>
-                <Element2>95f5638c3617406a852436b2a24c2c1a</Element2>
-                <kinematicClass>P4</kinematicClass>
-            </ExternalPair2>
-            <Unit1 id="57ecd1c1fe184428ac5187726ac75a65" name="Lever 1" length="20" fixed="false">
+        <FirstTypeGroup id="03b9f07c803e4526895e80b562541196" name="Test group 1">
+            <InternalRotationalPair angle="0.0" id="16040d9009dc439da40e7f3b2813a312" name="Internal pair">
+                <Disposition offsetX="0.0" offsetY="0.0"/>
+                <Element1>a7d49718661d48089de69e1babf6f4be</Element1>
+                <Element2>d5cf989f49fb4b0e847aa7821933a8da</Element2>
+                <KinematicClass>P4</KinematicClass>
+            </InternalRotationalPair>
+            <ExternalRotationalPair1 angle="0.0" id="e53b3383c0b5432ba367c8e70263c0b0" name="Ext pair 1">
+                <Disposition offsetX="0.0" offsetY="0.0"/>
+                <Element1>6f1d31d6a16f4dea96e9fdb06f92afaa</Element1>
+                <Element2>b5b1bab34ea54496b9cfeda1a73077a6</Element2>
+                <KinematicClass>P4</KinematicClass>
+            </ExternalRotationalPair1>
+            <ExternalRotationalPair2 angle="0.0" id="356fe4d755ef43dda1b853688b06994b" name="Ext pair 2">
+                <Disposition offsetX="0.0" offsetY="0.0"/>
+                <Element1>8b2e5736901447e09cb6a1cd3f59755d</Element1>
+                <Element2>8ac45ce7114b4caea450f3ba37fe45c2</Element2>
+                <KinematicClass>P4</KinematicClass>
+            </ExternalRotationalPair2>
+            <Unit1 id="1b816dad498740008aed151c5958c9fe" name="Lever 1" length="20" fixed="false">
                 <Disposition offsetX="0.0" offsetY="0.0"/>
                 <Elements>
-                    <Element id="31920e7ea3ae445c919e90d401f619b1">
-                        <unit>57ecd1c1fe184428ac5187726ac75a65</unit>
+                    <Element id="b5b1bab34ea54496b9cfeda1a73077a6">
+                        <unit>1b816dad498740008aed151c5958c9fe</unit>
                         <Disposition offsetX="0.0" offsetY="0.0"/>
-                        <RotationalPair angle="0.0" id="35fc759aa5204c5a978e2f1389a12f66" name="Ext pair 1">
-                            <disposition offsetX="0.0" offsetY="0.0"/>
-                            <Element1>a012a81ffe7b491ab6c3d1488cf7699c</Element1>
-                            <Element2>31920e7ea3ae445c919e90d401f619b1</Element2>
-                            <kinematicClass>P4</kinematicClass>
-                        </RotationalPair>
                     </Element>
-                    <Element id="31920e7ea3ae445c919e90d401f619b1">
-                        <unit>57ecd1c1fe184428ac5187726ac75a65</unit>
-                        <Disposition offsetX="0.0" offsetY="0.0"/>
-                        <RotationalPair angle="0.0" id="35fc759aa5204c5a978e2f1389a12f66" name="Ext pair 1">
-                            <disposition offsetX="0.0" offsetY="0.0"/>
-                            <Element1>a012a81ffe7b491ab6c3d1488cf7699c</Element1>
-                            <Element2>31920e7ea3ae445c919e90d401f619b1</Element2>
-                            <kinematicClass>P4</kinematicClass>
-                        </RotationalPair>
-                    </Element>
-                    <Element id="7798e2a495e84dea92d9c765d9b602ca">
-                        <unit>57ecd1c1fe184428ac5187726ac75a65</unit>
+                    <Element id="a7d49718661d48089de69e1babf6f4be">
+                        <unit>1b816dad498740008aed151c5958c9fe</unit>
                         <Disposition offsetX="20.0" offsetY="0.0"/>
-                        <RotationalPair angle="0.0" id="6fbd9bc11cef42b4b8039c68742e0490" name="Internal pair">
-                            <disposition offsetX="0.0" offsetY="0.0"/>
-                            <Element1>7798e2a495e84dea92d9c765d9b602ca</Element1>
-                            <Element2>3db3879cbf5e4461abd1ec497f4748fc</Element2>
-                            <kinematicClass>P4</kinematicClass>
-                        </RotationalPair>
-                    </Element>
-                    <Element id="7798e2a495e84dea92d9c765d9b602ca">
-                        <unit>57ecd1c1fe184428ac5187726ac75a65</unit>
-                        <Disposition offsetX="20.0" offsetY="0.0"/>
-                        <RotationalPair angle="0.0" id="6fbd9bc11cef42b4b8039c68742e0490" name="Internal pair">
-                            <disposition offsetX="0.0" offsetY="0.0"/>
-                            <Element1>7798e2a495e84dea92d9c765d9b602ca</Element1>
-                            <Element2>3db3879cbf5e4461abd1ec497f4748fc</Element2>
-                            <kinematicClass>P4</kinematicClass>
-                        </RotationalPair>
                     </Element>
                 </Elements>
             </Unit1>
-            <Unit2 id="fbe0de6bcfab4879bae3c27a18d76a6f" name="Lever 2" length="20" fixed="false">
+            <Unit2 id="6cddfac9bbaf401595137acad585f610" name="Lever 2" length="20" fixed="false">
                 <Disposition offsetX="0.0" offsetY="0.0"/>
                 <Elements>
-                    <Element id="3db3879cbf5e4461abd1ec497f4748fc">
-                        <unit>fbe0de6bcfab4879bae3c27a18d76a6f</unit>
+                    <Element id="d5cf989f49fb4b0e847aa7821933a8da">
+                        <unit>6cddfac9bbaf401595137acad585f610</unit>
                         <Disposition offsetX="0.0" offsetY="0.0"/>
-                        <RotationalPair angle="0.0" id="6fbd9bc11cef42b4b8039c68742e0490" name="Internal pair">
-                            <disposition offsetX="0.0" offsetY="0.0"/>
-                            <Element1>7798e2a495e84dea92d9c765d9b602ca</Element1>
-                            <Element2>3db3879cbf5e4461abd1ec497f4748fc</Element2>
-                            <kinematicClass>P4</kinematicClass>
-                        </RotationalPair>
                     </Element>
-                    <Element id="3db3879cbf5e4461abd1ec497f4748fc">
-                        <unit>fbe0de6bcfab4879bae3c27a18d76a6f</unit>
-                        <Disposition offsetX="0.0" offsetY="0.0"/>
-                        <RotationalPair angle="0.0" id="6fbd9bc11cef42b4b8039c68742e0490" name="Internal pair">
-                            <disposition offsetX="0.0" offsetY="0.0"/>
-                            <Element1>7798e2a495e84dea92d9c765d9b602ca</Element1>
-                            <Element2>3db3879cbf5e4461abd1ec497f4748fc</Element2>
-                            <kinematicClass>P4</kinematicClass>
-                        </RotationalPair>
-                    </Element>
-                    <Element id="9cb73693ef2b4694be61a3b4b1d35efb">
-                        <unit>fbe0de6bcfab4879bae3c27a18d76a6f</unit>
+                    <Element id="8b2e5736901447e09cb6a1cd3f59755d">
+                        <unit>6cddfac9bbaf401595137acad585f610</unit>
                         <Disposition offsetX="20.0" offsetY="0.0"/>
-                        <RotationalPair angle="0.0" id="f1d17f79ffa241d68d38749309ada81f" name="Ext pair 2">
-                            <disposition offsetX="0.0" offsetY="0.0"/>
-                            <Element1>9cb73693ef2b4694be61a3b4b1d35efb</Element1>
-                            <Element2>95f5638c3617406a852436b2a24c2c1a</Element2>
-                            <kinematicClass>P4</kinematicClass>
-                        </RotationalPair>
-                    </Element>
-                    <Element id="9cb73693ef2b4694be61a3b4b1d35efb">
-                        <unit>fbe0de6bcfab4879bae3c27a18d76a6f</unit>
-                        <Disposition offsetX="20.0" offsetY="0.0"/>
-                        <RotationalPair angle="0.0" id="f1d17f79ffa241d68d38749309ada81f" name="Ext pair 2">
-                            <disposition offsetX="0.0" offsetY="0.0"/>
-                            <Element1>9cb73693ef2b4694be61a3b4b1d35efb</Element1>
-                            <Element2>95f5638c3617406a852436b2a24c2c1a</Element2>
-                            <kinematicClass>P4</kinematicClass>
-                        </RotationalPair>
                     </Element>
                 </Elements>
             </Unit2>

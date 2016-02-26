@@ -24,10 +24,10 @@ public abstract class AbstractKinematicPair implements KinematicPair {
     @XmlID
     private String id = MechanismUtils.generateId();
 
-    @XmlAttribute
+    @XmlAttribute(name = "name")
     private String name;
 
-    @XmlElement
+    @XmlElement(name = "Disposition")
     private Disposition disposition = new Disposition();
 
     @XmlIDREF
@@ -121,5 +121,24 @@ public abstract class AbstractKinematicPair implements KinematicPair {
             .append("unitElement1", unitElement1)
             .append("unitElement2", unitElement2)
             .toString();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AbstractKinematicPair that = (AbstractKinematicPair) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        return !(name != null ? !name.equals(that.name) : that.name != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }

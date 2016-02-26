@@ -1,6 +1,6 @@
 package com.mar.tmm.util;
 
-import com.mar.tmm.model.Unit;
+import com.mar.tmm.model.impl.Unit;
 import com.mar.tmm.model.impl.UnitElement;
 import com.mar.tmm.model.impl.group.AbstractGroup;
 import com.mar.tmm.model.impl.group.FifthTypeGroup;
@@ -196,12 +196,10 @@ public final class GroupUtils {
         final AbstractKinematicPair pair2) {
 
         final UnitElement firstUnitElement = KinematicUtils.createElementForUnit(unit, 0, 0);
-        unit.getElements().add(firstUnitElement);
         pair1.setUnitElement2(firstUnitElement);
         firstUnitElement.setKinematicPair(pair1);
 
         final UnitElement secondUnitElement = KinematicUtils.createElementForUnit(unit, unit.getLength(), 0);
-        unit.getElements().add(secondUnitElement);
         pair2.setUnitElement1(secondUnitElement);
         secondUnitElement.setKinematicPair(pair2);
     }

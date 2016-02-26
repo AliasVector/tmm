@@ -14,7 +14,7 @@ import com.mar.tmm.io.impl.XMLMechanismReader;
 import com.mar.tmm.io.impl.XMLMechanismWriter;
 import com.mar.tmm.model.Group;
 import com.mar.tmm.model.Mechanism;
-import com.mar.tmm.model.Unit;
+import com.mar.tmm.model.impl.Unit;
 import com.mar.tmm.model.impl.DefaultMechanism;
 import com.mar.tmm.model.impl.UnitElement;
 import com.mar.tmm.model.impl.group.FirstTypeGroup;
@@ -56,12 +56,7 @@ public class XMLMechanismWriterTest {
 
     private void checkXMLFile(final String fileName) throws IOException {
         final File file = new File(fileName);
-
         assertTrue("File doesn't exist", file.exists());
-//        final String referenceFile = readFile(getClass().getResource(REFERENCE_XML_RESOURCE).getPath());
-//        final String testFile = readFile(fileName);
-//
-//        assertEquals("Result is not correct", referenceFile, testFile);
     }
 
     private void removeXMLFile(final String fileName) throws IOException {
@@ -86,31 +81,25 @@ public class XMLMechanismWriterTest {
 
         assertEquals("Mechanisms are not equals", referenceMechanism, testMechanism);
 
-        final String referenceToString = referenceMechanism.toString();
-        final String testToString = testMechanism.toString();
+        // Mechanisms' units
+        compareUnits(referenceMechanism.getRackUnit(), testMechanism.getRackUnit());
+        compareUnits(referenceMechanism.getLeverUnit(), testMechanism.getLeverUnit());
+        // Mechanisms' kinematic pairs
+        assertEquals("Mechanisms' kinematic pairs are not equals", referenceMechanism.getKinematicPair(),
+            testMechanism.getKinematicPair());
 
-        assertEquals("Reference and test mechanisms are not the equals", referenceToString, testToString);
+        // Mechanisms' groups
+        assertEquals("Reference mechanism groups and test mechanism groups have different sizes",
+            CollectionUtils.size(referenceMechanism.getGroups()), CollectionUtils.size(testMechanism.getGroups()));
+        for (final Group referenceGroup : referenceMechanism.getGroups()) {
+            assertTrue("Test mechanism doesn't contain all reference groups",
+                testMechanism.getGroups().contains(referenceGroup));
 
-//
-//        // Mechanisms' units
-//        compareUnits(referenceMechanism.getRackUnit(), testMechanism.getRackUnit());
-//        compareUnits(referenceMechanism.getLeverUnit(), testMechanism.getLeverUnit());
-//        // Mechanisms' kinematic pairs
-//        assertEquals("Mechanisms' kinematic pairs are not equals", referenceMechanism.getKinematicPair(),
-//            testMechanism.getKinematicPair());
-//
-//        // Mechanisms' groups
-//        assertEquals("Reference mechanism groups and test mechanism groups have different sizes",
-//            CollectionUtils.size(referenceMechanism.getGroups()), CollectionUtils.size(testMechanism.getGroups()));
-//        for (final Group referenceGroup : referenceMechanism.getGroups()) {
-//            assertTrue("Test mechanism doesn't contain all reference groups",
-//                testMechanism.getGroups().contains(referenceGroup));
-//
-//            final int index = testMechanism.getGroups().indexOf(referenceGroup);
-//            final Group testGroup = testMechanism.getGroups().get(index);
-//
-//            compareGroups(referenceGroup, testGroup);
-//        }
+            final int index = testMechanism.getGroups().indexOf(referenceGroup);
+            final Group testGroup = testMechanism.getGroups().get(index);
+
+            compareGroups(referenceGroup, testGroup);
+        }
     }
 
     private void compareUnits(final Unit referenceUnit, final Unit testUnit) {
@@ -155,12 +144,17 @@ public class XMLMechanismWriterTest {
         assertEquals("Test group type and reference group type are not the same", referenceGroup.getType(),
             testGroup.getType());
 
-//        for (final KinematicPair refExtKinematicPair : referenceGroup.getExternalKinematicPairs()) {
-//            assertTrue("Test group doesn't contains reference ext ")
-//
-//            compareDescendingKinematicPairs(final KinematicPair referencePair, final KinematicPair testPair);
-//        }
+        compareUnits(referenceGroup.getUnit1(), testGroup.getUnit1());
+        compareUnits(referenceGroup.getUnit2(), testGroup.getUnit2());
 
+        assertEquals("Group internal kinematic pair is not the same as test group internal kinematic pair",
+            referenceGroup.getInternalPair(), testGroup.getInternalPair());
+
+        assertEquals("Group internal kinematic pair is not the same as test group internal kinematic pair",
+            referenceGroup.getInternalPair(), testGroup.getInternalPair());
+
+        assertEquals("Group internal kinematic pair is not the same as test group internal kinematic pair",
+            referenceGroup.getInternalPair(), testGroup.getInternalPair());
     }
 
     @Test

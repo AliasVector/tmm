@@ -1,18 +1,15 @@
 package com.mar.tmm.io.impl;
 
 import java.io.File;
+import java.util.Set;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
+import com.google.common.collect.Sets;
 import com.mar.tmm.io.MechanismReader;
 import com.mar.tmm.io.exception.TmmIOException;
 import com.mar.tmm.model.Mechanism;
-import com.mar.tmm.model.Unit;
-import com.mar.tmm.model.impl.UnitElement;
-import com.mar.tmm.model.impl.group.FirstTypeGroup;
-import com.mar.tmm.model.impl.group.SecondTypeGroup;
-import com.mar.tmm.model.impl.kinematicpair.RotationalPair;
-import com.mar.tmm.model.impl.kinematicpair.TranslationalPair;
+import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,9 +41,31 @@ public class XMLMechanismReader implements MechanismReader {
         try {
             final File sourceFile = new File(source);
 
+            // Kinematic pairs for postprocessing
+            final Set<AbstractKinematicPair> pairs = Sets.newHashSet();
+
             final JAXBContext context = JAXBContext.newInstance(targetType);
             final Unmarshaller unmarshaller = context.createUnmarshaller();
+            unmarshaller.setListener(new Unmarshaller.Listener() {
+                @Override
+                public void beforeUnmarshal(final Object target, final Object parent) {
+                    super.beforeUnmarshal(target, parent);
+                }
+
+                @Override
+                public void afterUnmarshal(final Object target, final Object parent) {
+                    super.afterUnmarshal(target, parent);
+
+                    if (target instanceof AbstractKinematicPair) {
+                        pairs.add((AbstractKinematicPair) target);
+                    }
+                }
+            });
+
             final T result = (T) unmarshaller.unmarshal(sourceFile);
+
+            // Postprocess pairs to set up theirselves into xml transient elements
+            postProcessPairs(pairs);
 
             LOGGER.debug("Source file: {} is successfully unmarshalled into: {}", source, result);
             return result;
@@ -54,6 +73,17 @@ public class XMLMechanismReader implements MechanismReader {
             LOGGER.error("Error occured during unmarshalling source: {} into mechanism class: {}", source,
                 targetType, e);
             throw new TmmIOException("Cannot unmarshall source", e);
+        }
+    }
+
+    private void postProcessPairs(final Set<AbstractKinematicPair> pairs) {
+        for (final AbstractKinematicPair pair : pairs) {
+            if (pair.getUnitElement1() != null) {
+                pair.getUnitElement1().setKinematicPair(pair);
+            }
+            if (pair.getUnitElement2() != null) {
+                pair.getUnitElement2().setKinematicPair(pair);
+            }
         }
     }
 

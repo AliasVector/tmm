@@ -1,8 +1,9 @@
 package com.mar.tmm.model;
 
-import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
-
 import java.util.List;
+
+import com.mar.tmm.model.impl.Unit;
+import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
 
 /**
  * Interface to describe the common behavior for all kind of mechanisms.

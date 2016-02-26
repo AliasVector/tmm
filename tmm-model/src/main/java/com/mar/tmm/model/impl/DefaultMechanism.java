@@ -3,20 +3,17 @@ package com.mar.tmm.model.impl;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.common.collect.Lists;
 import com.mar.tmm.model.Group;
 import com.mar.tmm.model.KinematicPair;
 import com.mar.tmm.model.Mechanism;
-import com.mar.tmm.model.Unit;
 import com.mar.tmm.model.impl.group.FifthTypeGroup;
 import com.mar.tmm.model.impl.group.FirstTypeGroup;
 import com.mar.tmm.model.impl.group.FourthTypeGroup;
@@ -133,7 +130,7 @@ public class DefaultMechanism implements Mechanism {
      */
     @Override
     public List<Group> getGroups() {
-        return null;
+        return groups;
     }
 
     public void setGroups(final List<Group> groups) {

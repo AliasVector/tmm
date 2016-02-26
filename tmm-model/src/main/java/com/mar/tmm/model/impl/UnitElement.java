@@ -4,17 +4,12 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.mar.tmm.model.EntityWithId;
 import com.mar.tmm.model.KinematicPair;
-import com.mar.tmm.model.Unit;
-import com.mar.tmm.model.impl.kinematicpair.AbstractKinematicPair;
-import com.mar.tmm.model.impl.kinematicpair.RotationalPair;
-import com.mar.tmm.model.impl.kinematicpair.TranslationalPair;
 import com.mar.tmm.util.MechanismUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -35,10 +30,7 @@ public class UnitElement implements EntityWithId {
     @XmlElement(name = "Disposition")
     private Disposition disposition;
 
-    @XmlIDREF
-    @XmlElements({
-            @XmlElement(name="RotationalPair", type = RotationalPair.class),
-            @XmlElement(name="TranslationalPair", type = TranslationalPair.class)})
+    @XmlTransient
     private KinematicPair kinematicPair;
 
     /**
@@ -85,5 +77,21 @@ public class UnitElement implements EntityWithId {
             .append("disposition", disposition)
             .append("kinematicPair.id", kinematicPair == null ? "" : kinematicPair.getId())
             .toString();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UnitElement that = (UnitElement) o;
+
+        return !(id != null ? !id.equals(that.id) : that.id != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }
