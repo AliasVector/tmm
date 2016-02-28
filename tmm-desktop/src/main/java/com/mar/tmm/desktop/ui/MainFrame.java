@@ -1,5 +1,10 @@
 package com.mar.tmm.desktop.ui;
 
+import com.mar.tmm.props.PropertiesManager;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 /**
  * Main frame of tmm application.
  */
@@ -10,6 +15,24 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(final WindowEvent e) {
+                saveFrame();
+            }
+        });
+    }
+
+    private void initFrame() {
+        final Integer width = PropertiesManager.getInstance().readInt("MainFrame.width", getSize().width);
+        final Integer height = PropertiesManager.getInstance().readInt("MainFrame.height", getSize().height);
+        setSize(width, height);
+    }
+
+    private void saveFrame() {
+        PropertiesManager.getInstance().storeInt("MainFrame.width", getSize().width);
+        PropertiesManager.getInstance().storeInt("MainFrame.height", getSize().height);
     }
 
     /**
