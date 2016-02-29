@@ -2,6 +2,7 @@ package com.mar.tmm.desktop;
 
 import com.mar.tmm.desktop.ui.MainFrame;
 import static java.awt.EventQueue.invokeLater;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import org.slf4j.Logger;

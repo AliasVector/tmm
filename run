@@ -1,0 +1,4 @@
+#!/bin/bash
+
+java -jar -Xms256m -Xmx512m -XX:MaxPermSize=128m ./tmm-desktop/target/tmm-desktop-1.0-SNAPSHOT.jar
+

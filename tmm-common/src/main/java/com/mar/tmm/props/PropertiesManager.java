@@ -9,11 +9,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Properties;
+import org.apache.commons.lang3.BooleanUtils;
 
 /**
  * Manager to store and restore properties.
  */
 public final class PropertiesManager {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(PropertiesManager.class);
     private static final String CONSTANT_USER_HOME = "user.home";
     private static final String FILE_NAME = "TmmApplication.properties";
@@ -55,14 +57,21 @@ public final class PropertiesManager {
 
     public synchronized void storeProperty(final String key, final String value) {
         properties.setProperty(key, value);
-        writePropertiesFile();
     }
 
+    public synchronized void storeProperties() {
+        writePropertiesFile();
+    }
+    
     public synchronized String readProperty(final String key) {
         return properties.getProperty(key);
     }
 
     public void storeInt(final String key, final Integer value) {
+        storeProperty(key, value == null ? null : value.toString());
+    }
+
+    public void storeBoolean(final String key, final Boolean value) {
         storeProperty(key, value == null ? null : value.toString());
     }
 
@@ -76,16 +85,28 @@ public final class PropertiesManager {
     }
 
     public Integer readInt(final String key, final Integer defaultValue) {
-        try {
-            final Integer value = NumberUtils.createInteger(readProperty(key));
-            if (value == null) {
-                return defaultValue;
-            }
-            return value;
-        } catch (final Exception e) {
-            LOGGER.error("Cannot read int by the given key: {}", key, e);
+        final Integer value = readInt(key);
+        if (value == null) {
             return defaultValue;
         }
+        return value;
+    }
+
+    public Boolean readBoolean(final String key) {
+        try {
+            return BooleanUtils.toBoolean(readProperty(key));
+        } catch (final Exception e) {
+            LOGGER.error("Cannot read boolean by the given key: {}", key, e);
+            return null;
+        }
+    }
+
+    public Boolean readBoolean(final String key, final Boolean defaultValue) {
+        final Boolean value = readBoolean(key);
+        if (value == null) {
+            return defaultValue;
+        }
+        return value;
     }
 
     public static PropertiesManager getInstance() {
