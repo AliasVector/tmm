@@ -2,6 +2,7 @@ package com.mar.tmm.desktop.props;
 
 import com.mar.tmm.props.PropertiesManager;
 import javax.swing.JFrame;
+import javax.swing.JSplitPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,29 +13,67 @@ public final class UIPropertiesManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UIPropertiesManager.class);
 
+    private static final String POSTFIX_MAXIMIZED = ".maximized";
+    private static final String POSTFIX_HEIGHT = ".height";
+    private static final String POSTFIX_WIDTH = ".width";
+    private static final String POSTFIX_DIVIDER_LOCATION = ".dividerLocation";
+
     private UIPropertiesManager() {
     }
 
-    public static void initFrame(final JFrame frame, final String framePrefix) {
+    public static <T extends JFrame> void initFrame(final T form, final String framePrefix) {
+        LOGGER.debug("Start initializing frame configs...");
         final PropertiesManager props = PropertiesManager.getInstance();
-        final Integer width = props.readInt(framePrefix + ".width", frame.getWidth());
-        final Integer height = props.readInt(framePrefix + ".height", frame.getHeight());
-        final Boolean maximized = props.readBoolean(framePrefix + ".maximized",
-                frame.getExtendedState() == JFrame.MAXIMIZED_BOTH);
+        final Integer width = props.readInt(framePrefix + POSTFIX_WIDTH, form.getWidth());
+        final Integer height = props.readInt(framePrefix + POSTFIX_HEIGHT, form.getHeight());
+        final Boolean maximized = props.readBoolean(framePrefix + POSTFIX_MAXIMIZED,
+                form.getExtendedState() == JFrame.MAXIMIZED_BOTH);
 
         if (maximized) {
-            frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            form.setExtendedState(JFrame.MAXIMIZED_BOTH);
         } else {
-            frame.setSize(width, height);
+            form.setSize(width, height);
         }
+
+        if (form instanceof CustomizableForm) {
+            LOGGER.debug("Frame is customizable form. Init custom properties");
+            ((CustomizableForm) form).loadCustomProperties();
+        }
+
+        LOGGER.debug("Finished initializing frame configs");
     }
 
-    public static void storeFrame(final JFrame frame, final String framePrefix) {
+    public static <T extends JFrame> void storeFrame(final T form, final String framePrefix) {
+        LOGGER.debug("Started storing frame configs...");
         final PropertiesManager props = PropertiesManager.getInstance();
-        props.storeInt(framePrefix + ".width", frame.getWidth());
-        props.storeInt(framePrefix + ".height", frame.getHeight());
-        props.storeBoolean(framePrefix + ".maximized", frame.getExtendedState() == JFrame.MAXIMIZED_BOTH);
-        
+        props.storeInt(framePrefix + POSTFIX_WIDTH, form.getWidth());
+        props.storeInt(framePrefix + POSTFIX_HEIGHT, form.getHeight());
+        props.storeBoolean(framePrefix + POSTFIX_MAXIMIZED, form.getExtendedState() == JFrame.MAXIMIZED_BOTH);
+
+        if (form instanceof CustomizableForm) {
+            LOGGER.debug("Frame is customizable form. Store custom properties");
+            ((CustomizableForm) form).storeCustomProperties();
+        }
+
         props.storeProperties();
+        LOGGER.debug("Finished storing frame configs");
+    }
+
+    public static void loadDividerLocation(final JSplitPane splitPane, final String prefix) {
+        LOGGER.debug("Started loading divider location for split pane: {}...", prefix);
+        final PropertiesManager props = PropertiesManager.getInstance();
+        final int dividerLocation = props.readInt(prefix + POSTFIX_DIVIDER_LOCATION, splitPane.getDividerLocation());
+        LOGGER.debug("Found devider location = {}", dividerLocation);
+        splitPane.setDividerLocation(dividerLocation);
+        LOGGER.debug("Set location to {}", splitPane.getDividerLocation());
+        LOGGER.debug("Finished loading divider location for split pane: {} - {}", prefix, dividerLocation);
+    }
+
+    public static void storeDividerLocation(final JSplitPane splitPane, final String prefix) {
+        LOGGER.debug("Started storing divider location for split pane: {}...", prefix);
+        final PropertiesManager props = PropertiesManager.getInstance();
+        props.storeInt(prefix + POSTFIX_DIVIDER_LOCATION, splitPane.getDividerLocation());
+        LOGGER.debug("Finished storing divider location for split pane: {} - {}", prefix, 
+                splitPane.getDividerLocation());
     }
 }

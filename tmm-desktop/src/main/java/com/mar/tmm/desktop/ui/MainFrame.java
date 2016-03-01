@@ -1,37 +1,21 @@
 package com.mar.tmm.desktop.ui;
 
+import com.mar.tmm.desktop.props.CustomizableForm;
 import com.mar.tmm.desktop.props.UIPropertiesManager;
-import com.mar.tmm.props.PropertiesManager;
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 /**
  * Main frame of tmm application.
  */
-public class MainFrame extends javax.swing.JFrame {
-    private static final String FRAME_PREFIX = "MainFrame";
+public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
+    public static final String FRAME_PREFIX = "MainFrame";
+    private static final String VERTICAL_SPLIT_PANE_PREFIX = FRAME_PREFIX + ".verticalSplitPane";
+    private static final String HORIZONTAL_SPLIT_PANE_PREFIX = FRAME_PREFIX + ".horizontalSplitPane";
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-    }
-
-    private void initFrame() {
-        UIPropertiesManager.initFrame(this, FRAME_PREFIX);
-
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(final WindowEvent e) {
-                saveFrame();
-            }
-        });
-    }
-
-    private void saveFrame() {
-        UIPropertiesManager.storeFrame(this, FRAME_PREFIX);
     }
 
     /**
@@ -45,17 +29,33 @@ public class MainFrame extends javax.swing.JFrame {
 
         jSPVertical = new javax.swing.JSplitPane();
         jSPHorizontal = new javax.swing.JSplitPane();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMFile = new javax.swing.JMenu();
         jMAbout = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jSPVertical.setDividerLocation(360);
+        jSPVertical.setDividerLocation(450);
+        jSPVertical.setDividerSize(6);
         jSPVertical.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSPVertical.setOneTouchExpandable(true);
 
-        jSPHorizontal.setDividerLocation(480);
+        jSPHorizontal.setDividerLocation(500);
+        jSPHorizontal.setDividerSize(6);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jSPHorizontal.setRightComponent(jPanel1);
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jSPHorizontal.setLeftComponent(jPanel3);
+
         jSPVertical.setTopComponent(jSPHorizontal);
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jSPVertical.setRightComponent(jPanel2);
 
         jMFile.setText("File");
         jMenuBar1.add(jMFile);
@@ -69,12 +69,14 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPVertical, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE)
+            .addComponent(jSPVertical)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPVertical, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+            .addComponent(jSPVertical)
         );
+
+        jSPVertical.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -83,7 +85,22 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMAbout;
     private javax.swing.JMenu jMFile;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSPHorizontal;
     private javax.swing.JSplitPane jSPVertical;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void loadCustomProperties() {
+        UIPropertiesManager.loadDividerLocation(jSPVertical, VERTICAL_SPLIT_PANE_PREFIX);
+        UIPropertiesManager.loadDividerLocation(jSPHorizontal, HORIZONTAL_SPLIT_PANE_PREFIX);
+    }
+
+    @Override
+    public void storeCustomProperties() {
+        UIPropertiesManager.storeDividerLocation(jSPVertical, VERTICAL_SPLIT_PANE_PREFIX);
+        UIPropertiesManager.storeDividerLocation(jSPHorizontal, HORIZONTAL_SPLIT_PANE_PREFIX);
+    }
 }

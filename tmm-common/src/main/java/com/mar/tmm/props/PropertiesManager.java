@@ -77,7 +77,7 @@ public final class PropertiesManager {
 
     public Integer readInt(final String key) {
         try {
-            return NumberUtils.createInteger(readProperty(key));
+            return Integer.valueOf(readProperty(key));
         } catch (final Exception e) {
             LOGGER.error("Cannot read int by the given key: {}", key, e);
             return null;

@@ -1,7 +1,11 @@
 package com.mar.tmm.desktop;
 
+import com.mar.tmm.desktop.props.UIPropertiesManager;
 import com.mar.tmm.desktop.ui.MainFrame;
-import static java.awt.EventQueue.invokeLater;
+import static java.awt.EventQueue.invokeAndWait;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.lang.reflect.InvocationTargetException;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -15,11 +19,11 @@ public class Application {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws InterruptedException, InvocationTargetException {
         initLookAndFeel();
-        
-        invokeLater(() -> {
-            new MainFrame().setVisible(true);
+
+        invokeAndWait(() -> {
+            initFrame(new MainFrame(), MainFrame.FRAME_PREFIX).setVisible(true);
         });
     }
 
@@ -41,5 +45,24 @@ public class Application {
                 LOGGER.error("Cannot set crossplatform look and feel.", ex);
             }
         }
+    }
+
+    public static <T extends JFrame> T initFrame(final T frame, final String framePrefix) {
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowOpened(final WindowEvent e) {
+                UIPropertiesManager.initFrame(frame, framePrefix);
+            }
+
+            @Override
+            public void windowClosing(final WindowEvent e) {
+                super.windowClosing(e);
+
+                LOGGER.debug("Before storing frame config...");
+                UIPropertiesManager.storeFrame(frame, framePrefix);
+            }
+        });
+
+        return frame;
     }
 }
