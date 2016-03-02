@@ -11,13 +11,21 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
     private static final String VERTICAL_SPLIT_PANE_PREFIX = FRAME_PREFIX + ".verticalSplitPane";
     private static final String HORIZONTAL_SPLIT_PANE_PREFIX = FRAME_PREFIX + ".horizontalSplitPane";
 
+    private MainFrameController controller;
+    
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        initController();
     }
 
+    private void initController() {
+        controller = new MainFrameController(this);
+        controller.newMechanism();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,16 +37,22 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
 
         jSPVertical = new javax.swing.JSplitPane();
         jSPHorizontal = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jPDiagrams = new javax.swing.JPanel();
+        pCanvas = new org.piccolo2d.PCanvas();
+        jPTable = new javax.swing.JPanel();
+        jMainMenuBar = new javax.swing.JMenuBar();
         jMFile = new javax.swing.JMenu();
+        jMINew = new javax.swing.JMenuItem();
+        jMIOpen = new javax.swing.JMenuItem();
+        jMISave = new javax.swing.JMenuItem();
+        jMISaveAs = new javax.swing.JMenuItem();
         jMAbout = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("messages"); // NOI18N
+        setTitle(bundle.getString("MainFrame.title")); // NOI18N
 
-        jSPVertical.setDividerLocation(450);
+        jSPVertical.setDividerLocation(460);
         jSPVertical.setDividerSize(6);
         jSPVertical.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSPVertical.setOneTouchExpandable(true);
@@ -46,34 +60,66 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
         jSPHorizontal.setDividerLocation(500);
         jSPHorizontal.setDividerSize(6);
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jSPHorizontal.setRightComponent(jPanel1);
-
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jSPHorizontal.setLeftComponent(jPanel3);
+        jPDiagrams.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jSPHorizontal.setRightComponent(jPDiagrams);
+        jSPHorizontal.setLeftComponent(pCanvas);
 
         jSPVertical.setTopComponent(jSPHorizontal);
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jSPVertical.setRightComponent(jPanel2);
+        jPTable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jSPVertical.setRightComponent(jPTable);
 
-        jMFile.setText("File");
-        jMenuBar1.add(jMFile);
+        jMFile.setText(bundle.getString("MainFrame.MainMenu.file")); // NOI18N
 
-        jMAbout.setText("About");
-        jMenuBar1.add(jMAbout);
+        jMINew.setText(bundle.getString("MainFrame.MainMenu.File.new")); // NOI18N
+        jMINew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMINewActionPerformed(evt);
+            }
+        });
+        jMFile.add(jMINew);
 
-        setJMenuBar(jMenuBar1);
+        jMIOpen.setText(bundle.getString("MainFrame.MainMenu.File.open")); // NOI18N
+        jMIOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIOpenActionPerformed(evt);
+            }
+        });
+        jMFile.add(jMIOpen);
+
+        jMISave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMISave.setText(bundle.getString("MainFrame.MainMenu.File.save")); // NOI18N
+        jMISave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMISaveActionPerformed(evt);
+            }
+        });
+        jMFile.add(jMISave);
+
+        jMISaveAs.setText(bundle.getString("MainFrame.MainMenu.File.save.as")); // NOI18N
+        jMISaveAs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMISaveAsActionPerformed(evt);
+            }
+        });
+        jMFile.add(jMISaveAs);
+
+        jMainMenuBar.add(jMFile);
+
+        jMAbout.setText(bundle.getString("MainFrame.MainMenu.about")); // NOI18N
+        jMainMenuBar.add(jMAbout);
+
+        setJMenuBar(jMainMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPVertical)
+            .addComponent(jSPVertical, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPVertical)
+            .addComponent(jSPVertical, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
         );
 
         jSPVertical.getAccessibleContext().setAccessibleName("");
@@ -81,15 +127,35 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMIOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIOpenActionPerformed
+        controller.openMechanism();
+    }//GEN-LAST:event_jMIOpenActionPerformed
+
+    private void jMISaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMISaveActionPerformed
+        controller.saveMechanism();
+    }//GEN-LAST:event_jMISaveActionPerformed
+
+    private void jMISaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMISaveAsActionPerformed
+        controller.saveMechanismAs();
+    }//GEN-LAST:event_jMISaveAsActionPerformed
+
+    private void jMINewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMINewActionPerformed
+        controller.newMechanism();
+    }//GEN-LAST:event_jMINewActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMAbout;
     private javax.swing.JMenu jMFile;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JMenuItem jMINew;
+    private javax.swing.JMenuItem jMIOpen;
+    private javax.swing.JMenuItem jMISave;
+    private javax.swing.JMenuItem jMISaveAs;
+    private javax.swing.JMenuBar jMainMenuBar;
+    private javax.swing.JPanel jPDiagrams;
+    private javax.swing.JPanel jPTable;
     private javax.swing.JSplitPane jSPHorizontal;
     private javax.swing.JSplitPane jSPVertical;
+    private org.piccolo2d.PCanvas pCanvas;
     // End of variables declaration//GEN-END:variables
 
     @Override
