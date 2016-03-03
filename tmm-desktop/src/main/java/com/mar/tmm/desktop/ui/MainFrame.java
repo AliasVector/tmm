@@ -2,11 +2,15 @@ package com.mar.tmm.desktop.ui;
 
 import com.mar.tmm.desktop.props.CustomizableForm;
 import com.mar.tmm.desktop.props.UIPropertiesManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Main frame of tmm application.
  */
 public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainFrame.class);
+    
     public static final String FRAME_PREFIX = "MainFrame";
     private static final String VERTICAL_SPLIT_PANE_PREFIX = FRAME_PREFIX + ".verticalSplitPane";
     private static final String HORIZONTAL_SPLIT_PANE_PREFIX = FRAME_PREFIX + ".horizontalSplitPane";
@@ -18,6 +22,8 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
      */
     public MainFrame() {
         initComponents();
+        LOGGER.info("After init components");
+        
         initController();
     }
 
@@ -35,11 +41,8 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPMain = new javax.swing.JPanel();
         jSPVertical = new javax.swing.JSplitPane();
-        jSPHorizontal = new javax.swing.JSplitPane();
-        jPDiagrams = new javax.swing.JPanel();
-        pCanvas = new org.piccolo2d.PCanvas();
-        jPTable = new javax.swing.JPanel();
         jMainMenuBar = new javax.swing.JMenuBar();
         jMFile = new javax.swing.JMenu();
         jMINew = new javax.swing.JMenuItem();
@@ -52,22 +55,11 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("messages"); // NOI18N
         setTitle(bundle.getString("MainFrame.title")); // NOI18N
 
-        jSPVertical.setDividerLocation(460);
-        jSPVertical.setDividerSize(6);
+        jPMain.setLayout(new java.awt.BorderLayout());
+        getContentPane().add(jPMain, java.awt.BorderLayout.PAGE_START);
+
         jSPVertical.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSPVertical.setOneTouchExpandable(true);
-
-        jSPHorizontal.setDividerLocation(500);
-        jSPHorizontal.setDividerSize(6);
-
-        jPDiagrams.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jSPHorizontal.setRightComponent(jPDiagrams);
-        jSPHorizontal.setLeftComponent(pCanvas);
-
-        jSPVertical.setTopComponent(jSPHorizontal);
-
-        jPTable.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jSPVertical.setRightComponent(jPTable);
+        getContentPane().add(jSPVertical, java.awt.BorderLayout.CENTER);
 
         jMFile.setText(bundle.getString("MainFrame.MainMenu.file")); // NOI18N
 
@@ -111,19 +103,6 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
 
         setJMenuBar(jMainMenuBar);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPVertical, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSPVertical, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
-        );
-
-        jSPVertical.getAccessibleContext().setAccessibleName("");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -151,22 +130,19 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
     private javax.swing.JMenuItem jMISave;
     private javax.swing.JMenuItem jMISaveAs;
     private javax.swing.JMenuBar jMainMenuBar;
-    private javax.swing.JPanel jPDiagrams;
-    private javax.swing.JPanel jPTable;
-    private javax.swing.JSplitPane jSPHorizontal;
+    private javax.swing.JPanel jPMain;
     private javax.swing.JSplitPane jSPVertical;
-    private org.piccolo2d.PCanvas pCanvas;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void loadCustomProperties() {
         UIPropertiesManager.loadDividerLocation(jSPVertical, VERTICAL_SPLIT_PANE_PREFIX);
-        UIPropertiesManager.loadDividerLocation(jSPHorizontal, HORIZONTAL_SPLIT_PANE_PREFIX);
+//        UIPropertiesManager.loadDividerLocation(jSPHorizontal, HORIZONTAL_SPLIT_PANE_PREFIX);
     }
 
     @Override
     public void storeCustomProperties() {
         UIPropertiesManager.storeDividerLocation(jSPVertical, VERTICAL_SPLIT_PANE_PREFIX);
-        UIPropertiesManager.storeDividerLocation(jSPHorizontal, HORIZONTAL_SPLIT_PANE_PREFIX);
+//        UIPropertiesManager.storeDividerLocation(jSPHorizontal, HORIZONTAL_SPLIT_PANE_PREFIX);
     }
 }

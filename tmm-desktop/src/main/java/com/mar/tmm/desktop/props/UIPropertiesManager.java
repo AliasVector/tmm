@@ -14,6 +14,8 @@ public final class UIPropertiesManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(UIPropertiesManager.class);
 
     private static final String POSTFIX_MAXIMIZED = ".maximized";
+    private static final String POSTFIX_TOP = ".top";
+    private static final String POSTFIX_LEFT = ".left";
     private static final String POSTFIX_HEIGHT = ".height";
     private static final String POSTFIX_WIDTH = ".width";
     private static final String POSTFIX_DIVIDER_LOCATION = ".dividerLocation";
@@ -26,6 +28,8 @@ public final class UIPropertiesManager {
         final PropertiesManager props = PropertiesManager.getInstance();
         final Integer width = props.readInt(framePrefix + POSTFIX_WIDTH, form.getWidth());
         final Integer height = props.readInt(framePrefix + POSTFIX_HEIGHT, form.getHeight());
+        final Integer left = props.readInt(framePrefix + POSTFIX_LEFT, form.getX());
+        final Integer top = props.readInt(framePrefix + POSTFIX_TOP, form.getY());
         final Boolean maximized = props.readBoolean(framePrefix + POSTFIX_MAXIMIZED,
                 form.getExtendedState() == JFrame.MAXIMIZED_BOTH);
 
@@ -33,6 +37,7 @@ public final class UIPropertiesManager {
             form.setExtendedState(JFrame.MAXIMIZED_BOTH);
         } else {
             form.setSize(width, height);
+            form.setLocation(left, top);
         }
 
         if (form instanceof CustomizableForm) {
@@ -48,6 +53,8 @@ public final class UIPropertiesManager {
         final PropertiesManager props = PropertiesManager.getInstance();
         props.storeInt(framePrefix + POSTFIX_WIDTH, form.getWidth());
         props.storeInt(framePrefix + POSTFIX_HEIGHT, form.getHeight());
+        props.storeInt(framePrefix + POSTFIX_LEFT, form.getX());
+        props.storeInt(framePrefix + POSTFIX_TOP, form.getY());
         props.storeBoolean(framePrefix + POSTFIX_MAXIMIZED, form.getExtendedState() == JFrame.MAXIMIZED_BOTH);
 
         if (form instanceof CustomizableForm) {
@@ -63,9 +70,7 @@ public final class UIPropertiesManager {
         LOGGER.debug("Started loading divider location for split pane: {}...", prefix);
         final PropertiesManager props = PropertiesManager.getInstance();
         final int dividerLocation = props.readInt(prefix + POSTFIX_DIVIDER_LOCATION, splitPane.getDividerLocation());
-        LOGGER.debug("Found devider location = {}", dividerLocation);
         splitPane.setDividerLocation(dividerLocation);
-        LOGGER.debug("Set location to {}", splitPane.getDividerLocation());
         LOGGER.debug("Finished loading divider location for split pane: {} - {}", prefix, dividerLocation);
     }
 

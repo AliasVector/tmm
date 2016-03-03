@@ -71,6 +71,10 @@ public final class PropertiesManager {
         storeProperty(key, value == null ? null : value.toString());
     }
 
+    public void storeDouble(final String key, final Double value) {
+        storeProperty(key, value == null ? null : value.toString());
+    }
+
     public void storeBoolean(final String key, final Boolean value) {
         storeProperty(key, value == null ? null : value.toString());
     }
@@ -86,6 +90,23 @@ public final class PropertiesManager {
 
     public Integer readInt(final String key, final Integer defaultValue) {
         final Integer value = readInt(key);
+        if (value == null) {
+            return defaultValue;
+        }
+        return value;
+    }
+
+    public Double readDouble(final String key) {
+        try {
+            return Double.valueOf(readProperty(key));
+        } catch (final Exception e) {
+            LOGGER.error("Cannot read double by the given key: {}", key, e);
+            return null;
+        }
+    }
+
+    public Double readDouble(final String key, final Double defaultValue) {
+        final Double value = readDouble(key);
         if (value == null) {
             return defaultValue;
         }
