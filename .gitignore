@@ -4,3 +4,5 @@ target
 classes
 web-app/WEB-INF/classes
 *.log
+nbactions.xml
+*.log.*
