@@ -36,8 +36,7 @@ public class Application {
                 }
             }
         } catch (final Exception e) {
-            LOGGER.error("Cannot set nimbus look and feel. "
-                    + "Set cross platform llok and feel", e);
+            LOGGER.error("Cannot set nimbus look and feel. Set cross platform llok and feel", e);
 
             try {
                 UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
