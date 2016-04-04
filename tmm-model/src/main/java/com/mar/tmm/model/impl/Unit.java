@@ -18,7 +18,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Unit implements EntityWithId {
-    public static final int DEFAULT_LENGTH = 20;
+    public static final int DEFAULT_LENGTH = 200;
 
     @XmlAttribute(name = "id")
     @XmlID

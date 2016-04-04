@@ -1,7 +1,9 @@
-package com.mar.tmm.desktop.ui;
+package com.mar.tmm.desktop.ui.controller;
 
-import com.mar.tmm.desktop.model.MechanismStatus;
+import com.mar.tmm.desktop.model.MechanismState;
 import com.mar.tmm.desktop.service.MessageService;
+import com.mar.tmm.desktop.ui.MainFrame;
+import com.mar.tmm.model.Mechanism;
 import com.mar.tmm.model.impl.DefaultMechanism;
 import com.mar.tmm.util.MechanismUtils;
 import javax.swing.JOptionPane;
@@ -15,14 +17,14 @@ public class MainFrameController {
     private final MainFrame mainFrame;
     private DefaultMechanism currentMechanism;
     private String currentMechanismFilePath;
-    private MechanismStatus mechanismStatus;
+    private MechanismState mechanismState;
     
     public MainFrameController(final MainFrame mainFrame) {
         this.mainFrame = mainFrame;
     }
     
     public void newMechanism() {
-        if (mechanismStatus == MechanismStatus.MODYFIED) {
+        if (mechanismState == MechanismState.MODYFIED) {
             if (JOptionPane.showConfirmDialog(mainFrame, MessageService.getMessage("Message.mechanism.is.not.saved"), 
                     MessageService.getMessage("Message.mechanism.saving"), JOptionPane.YES_NO_OPTION) 
                     == JOptionPane.YES_OPTION) {
@@ -32,14 +34,14 @@ public class MainFrameController {
         
         currentMechanism = MechanismUtils.createMechanismWithRotationKinematicPair("Mechanism", "Pair 1", "Rack 1", 
                 "Lever 1");
-        mechanismStatus = MechanismStatus.MODYFIED;
+        mechanismState = MechanismState.MODYFIED;
         currentMechanismFilePath = "";
         
-        // ToDo refresh view
+        mainFrame.paintMechanism();
     }
     
     public void openMechanism() {
-        if (mechanismStatus == MechanismStatus.MODYFIED) {
+        if (mechanismState == MechanismState.MODYFIED) {
             if (JOptionPane.showConfirmDialog(mainFrame, MessageService.getMessage("Message.mechanism.is.not.saved"), 
                     MessageService.getMessage("Message.mechanism.saving"), JOptionPane.YES_NO_OPTION) 
                     == JOptionPane.YES_OPTION) {
@@ -49,7 +51,9 @@ public class MainFrameController {
         
         // ToDo
         JOptionPane.showMessageDialog(mainFrame, MessageService.getMessage("Message.mechanism.opening"));
-        mechanismStatus = MechanismStatus.STORED;
+        mechanismState = MechanismState.STORED;
+
+        mainFrame.paintMechanism();
     }
     
     public void saveMechanism() {
@@ -58,13 +62,17 @@ public class MainFrameController {
         } else {
             // ToDo
             JOptionPane.showMessageDialog(mainFrame, MessageService.getMessage("Message.mechanism.saving"));
-            mechanismStatus = MechanismStatus.STORED;
+            mechanismState = MechanismState.STORED;
         }
     }
     
     public void saveMechanismAs() {
         // ToDo
         JOptionPane.showMessageDialog(mainFrame, MessageService.getMessage("Message.mechanism.saving.as"));
-        mechanismStatus = MechanismStatus.STORED;
+        mechanismState = MechanismState.STORED;
+    }
+    
+    public Mechanism getMechanism() {
+        return currentMechanism;
     }
 }

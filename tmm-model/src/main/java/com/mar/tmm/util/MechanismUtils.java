@@ -83,9 +83,12 @@ public final class MechanismUtils {
         rackUnitElement.setKinematicPair(pair);
         pair.setUnitElement1(rackUnitElement);
 
-        final UnitElement leverUnitElement = KinematicUtils.createElementForUnit(result.getLeverUnit(), 0, 0);
-        leverUnitElement.setKinematicPair(pair);
-        pair.setUnitElement2(leverUnitElement);
+        final UnitElement leverUnitElement1 = KinematicUtils.createElementForUnit(result.getLeverUnit(), 0, 0);
+        leverUnitElement1.setKinematicPair(pair);
+        pair.setUnitElement2(leverUnitElement1);
+
+        final UnitElement leverUnitElement2 = KinematicUtils.createElementForUnit(result.getLeverUnit(), 
+                result.getLeverUnit().getLength(), 0);
 
         return result;
     }
