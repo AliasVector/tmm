@@ -24,7 +24,7 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
 
     private MainFrameController controller;
     
-    private MechanismPainter mechanismPainter = new DefaultMechanismPainter();
+    private final MechanismPainter mechanismPainter = new DefaultMechanismPainter();
 
     private int dividerVertical;
     private int dividerHorizontal;
@@ -53,6 +53,7 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
     public void paintMechanism() {
         LOGGER.debug("Paint mecnahism...");
         mechanismPainter.paint(controller.getMechanism(), pCMechanism);
+        pCMechanism.repaint();
         LOGGER.debug("Finish painting mecnahism...");
     }
     
