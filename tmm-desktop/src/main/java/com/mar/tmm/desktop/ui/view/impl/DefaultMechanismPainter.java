@@ -41,7 +41,7 @@ public class DefaultMechanismPainter implements MechanismPainter {
         }
 
         clearCanvas(canvas);
-        paintUnit(mechanism.getRackUnit(), Math.PI / 6, canvas);
+        paintUnit(mechanism.getRackUnit(), 0, canvas);
 
         paintedUnits.clear();
         paintedPairs.clear();

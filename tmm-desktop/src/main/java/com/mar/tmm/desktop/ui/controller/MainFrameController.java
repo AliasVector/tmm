@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
  */
 public class MainFrameController {
     private static final Logger LOGGER = LoggerFactory.getLogger(MainFrameController.class);
+    private static final int MOVE_THREAD_SLEEP = 5;
     
     private final MainFrame mainFrame;
     private DefaultMechanism currentMechanism;
@@ -26,7 +27,8 @@ public class MainFrameController {
 
     private SchemaService schemaService;
     private Thread mechanismThread;
-
+    
+    private volatile double delta = 1;
     
     public MainFrameController(final MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -36,7 +38,15 @@ public class MainFrameController {
     private void initSchemaService() {
         schemaService = new SchemaService();
     }
-    
+
+    public synchronized double getDelta() {
+        return delta;
+    }
+
+    public synchronized void setDelta(final double delta) {
+        this.delta = delta;
+    }
+
     public void newMechanism() {
         stopThread();
         
@@ -53,8 +63,7 @@ public class MainFrameController {
         mechanismState = MechanismState.MODYFIED;
         currentMechanismFilePath = "";
         
-        startThread();
-//        mainFrame.paintMechanism();
+        mainFrame.paintMechanism();
     }
     
     private void stopThread() {
@@ -69,18 +78,30 @@ public class MainFrameController {
             public void run() {
                 LOGGER.debug("Thread is run");
                 while(!isInterrupted()) {
-                    schemaService.recalculateMechanism(currentMechanism);
-                    mainFrame.paintMechanism();
                     try {
-                        sleep(20);
+                        doWork();
                     } catch(final InterruptedException ie) {
-                        // Nothing to do
+                        break;
                     }
                 }
                 LOGGER.debug("Thread is interrupted");
             }
+            
+            private void doWork() throws InterruptedException {
+                schemaService.recalculateMechanism(currentMechanism, getDelta());
+                mainFrame.paintMechanism();
+                sleep(MOVE_THREAD_SLEEP);
+            }
         };
         mechanismThread.start();
+    }
+    
+    public void startMoving() {
+        startThread();
+    }
+
+    public void stopMoving() {
+        stopThread();
     }
     
     public void openMechanism() {
@@ -98,8 +119,7 @@ public class MainFrameController {
         JOptionPane.showMessageDialog(mainFrame, MessageService.getMessage("Message.mechanism.opening"));
         mechanismState = MechanismState.STORED;
 
-        startThread();
-//        mainFrame.paintMechanism();
+        mainFrame.paintMechanism();
     }
     
     public void saveMechanism() {

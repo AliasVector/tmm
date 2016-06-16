@@ -5,7 +5,10 @@ import com.mar.tmm.desktop.props.CustomizableForm;
 import com.mar.tmm.desktop.props.UIPropertiesManager;
 import com.mar.tmm.desktop.ui.view.MechanismPainter;
 import com.mar.tmm.desktop.ui.view.impl.DefaultMechanismPainter;
+import com.mar.tmm.props.PropertiesManager;
+import javax.swing.JSpinner;
 import javax.swing.JSplitPane;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 import org.piccolo2d.event.PMouseWheelZoomEventHandler;
 import org.slf4j.Logger;
@@ -21,6 +24,7 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
     public static final String FRAME_PREFIX = "MainFrame";
     private static final String VERTICAL_SPLIT_PANE_PREFIX = FRAME_PREFIX + ".verticalSplitPane";
     private static final String HORIZONTAL_SPLIT_PANE_PREFIX = FRAME_PREFIX + ".horizontalSplitPane";
+    private static final String MOVING_DELTA = FRAME_PREFIX + ".movingDelta";
 
     private MainFrameController controller;
     
@@ -66,6 +70,10 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
     private void initComponents() {
 
         jPMain = new javax.swing.JPanel();
+        jPCommands = new javax.swing.JPanel();
+        jTBStart = new javax.swing.JToggleButton();
+        final SpinnerNumberModel deltaSpinnerModel = new SpinnerNumberModel(0.0,-90.0 ,90.0,0.1);
+        jSpDelta = new JSpinner(deltaSpinnerModel);
         jSPVertical = new JMSplitPane();
         jSPHorizontal = new JMSplitPane();
         pCMechanism = new org.piccolo2d.PCanvas();
@@ -91,7 +99,45 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
 
         jPMain.setLayout(new java.awt.BorderLayout());
 
-        jSPVertical.setDividerLocation(460);
+        jPCommands.setMinimumSize(new java.awt.Dimension(36, 36));
+        jPCommands.setPreferredSize(new java.awt.Dimension(840, 36));
+
+        jTBStart.setText(bundle.getString("MainFrame.Commands.start.stop")); // NOI18N
+        jTBStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTBStartActionPerformed(evt);
+            }
+        });
+
+        jSpDelta.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpDeltaStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPCommandsLayout = new javax.swing.GroupLayout(jPCommands);
+        jPCommands.setLayout(jPCommandsLayout);
+        jPCommandsLayout.setHorizontalGroup(
+            jPCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPCommandsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTBStart)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSpDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(615, Short.MAX_VALUE))
+        );
+        jPCommandsLayout.setVerticalGroup(
+            jPCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPCommandsLayout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addGroup(jPCommandsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTBStart)
+                    .addComponent(jSpDelta, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        jPMain.add(jPCommands, java.awt.BorderLayout.PAGE_START);
+
+        jSPVertical.setDividerLocation(465);
         jSPVertical.setDividerSize(5);
         jSPVertical.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSPVertical.setPreferredSize(new java.awt.Dimension(0, 0));
@@ -210,6 +256,18 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
         }
     }//GEN-LAST:event_jSPHorizontalPropertyChange
 
+    private void jTBStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTBStartActionPerformed
+        if (jTBStart.isSelected()) {
+            controller.startMoving();
+        } else {
+            controller.stopMoving();
+        }
+    }//GEN-LAST:event_jTBStartActionPerformed
+
+    private void jSpDeltaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpDeltaStateChanged
+        controller.setDelta(((Number)jSpDelta.getValue()).doubleValue());
+    }//GEN-LAST:event_jSpDeltaStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMAbout;
     private javax.swing.JMenu jMFile;
@@ -218,10 +276,13 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
     private javax.swing.JMenuItem jMISave;
     private javax.swing.JMenuItem jMISaveAs;
     private javax.swing.JMenuBar jMainMenuBar;
+    private javax.swing.JPanel jPCommands;
     private javax.swing.JPanel jPMain;
     private javax.swing.JSplitPane jSPHorizontal;
     private javax.swing.JSplitPane jSPVertical;
     private javax.swing.JScrollPane jScrPData;
+    private javax.swing.JSpinner jSpDelta;
+    private javax.swing.JToggleButton jTBStart;
     private javax.swing.JTable jTData;
     private org.piccolo2d.PCanvas pCDiagrams;
     private org.piccolo2d.PCanvas pCMechanism;
@@ -238,11 +299,18 @@ public class MainFrame extends javax.swing.JFrame implements CustomizableForm {
             UIPropertiesManager.loadDividerLocation(jSPHorizontal, HORIZONTAL_SPLIT_PANE_PREFIX);
             dividerHorizontal = jSPHorizontal.getDividerLocation();
         });
+
+        final PropertiesManager props = PropertiesManager.getInstance();
+        controller.setDelta(props.readDouble(MOVING_DELTA, controller.getDelta()));
+        jSpDelta.setValue(controller.getDelta());
     }
 
     @Override
     public void storeCustomProperties() {
         UIPropertiesManager.storeDividerLocation(jSPVertical, VERTICAL_SPLIT_PANE_PREFIX);
         UIPropertiesManager.storeDividerLocation(jSPHorizontal, HORIZONTAL_SPLIT_PANE_PREFIX);
+
+        final PropertiesManager props = PropertiesManager.getInstance();
+        props.storeDouble(MOVING_DELTA, controller.getDelta());
     }
 }

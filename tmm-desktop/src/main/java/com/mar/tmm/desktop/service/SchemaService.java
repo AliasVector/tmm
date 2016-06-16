@@ -12,8 +12,9 @@ import org.slf4j.LoggerFactory;
  */
 public class SchemaService {
     private static final Logger LOGGER = LoggerFactory.getLogger(SchemaService.class);
+    private static final double PI_GRAD_RATE = 180.0;
     
-    public void recalculateMechanism(final Mechanism mechanism) {
+    public void recalculateMechanism(final Mechanism mechanism, final double delta) {
         LOGGER.trace("Start recalculating of mechanism...");
         
         if (mechanism == null) {
@@ -26,8 +27,8 @@ public class SchemaService {
         final KinematicPair kg = mechanism.getKinematicPair();
         if (kg instanceof RotationalPair) {
             final RotationalPair rp = (RotationalPair) kg;
-            Double angle  = rp.getAngle() + Math.PI / 720;
-            if (angle % 360 == 0) {
+            Double angle  = rp.getAngle() + Math.PI * delta / PI_GRAD_RATE;
+            if (angle > Math.PI * 2) {
                 angle = 0.0;
             }
             
